@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'home/index'
   get 'recipes/index'
   get 'recipes/show'
   get 'recipes/new'
@@ -31,5 +32,7 @@ Rails.application.routes.draw do
   resources :recipes
 
   # Defines the root path route ("/")
+  root "home#index"
+
   # root "posts#index"
 end
