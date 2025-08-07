@@ -13,4 +13,14 @@
   <body>
     <%= yield %>
   </body>
+  <nav class="navbar">
+  <div class="navbar-container">
+    <a href="<%= root_path %>" class="navbar-brand">MyTaste</a>
+    <ul class="navbar-menu">
+      <li><a href="<%= movies_path %>" class="navbar-item">Movies</a></li>
+      <li><a href="<%= books_path %>" class="navbar-item">Books</a></li>
+      <li><a href="<%= recipes_path %>" class="navbar-item">Recipes</a></li>
+    </ul>
+  </div>
+</nav>
 </html>

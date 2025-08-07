@@ -1,14 +1,18 @@
-<div class="categories-container">
-  <%= link_to movies_path, class: "category-circle" do %>
-    Movies
-  <% end %>
-
-  <%= link_to books_path, class: "category-circle" do %>
-    Books
-  <% end %>
-
-  <%= link_to recipes_path, class: "category-circle" do %>
-    Recipes
-  <% end %>
+<div class="home-container">
+  <video class="video-background" autoplay muted loop>
+    <source src="<%= asset_path('background-video.mp4') %>" type="video/mp4">
+  </video>
+  
+  <div class="overlay"></div>
+  
+  <div class="content">
+    <h1 class="hero-title">Welcome to MyTaste</h1>
+    <p class="hero-subtitle">Discover your favorite movies, books, and recipes</p>
+    
+    <div class="cta-buttons">
+      <a href="<%= movies_path %>" class="cta-button">Explore Movies</a>
+      <a href="<%= books_path %>" class="cta-button">Browse Books</a>
+      <a href="<%= recipes_path %>" class="cta-button">Find Recipes</a>
+    </div>
+  </div>
 </div>
-
