@@ -1,23 +1,26 @@
-.video-background {
+/* Фон-видео на весь экран */
+.background-video {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: -1;
+  z-index: -1; /* отправляем на задний план */
 }
 
-.video-background video {
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
+#bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* заполняет весь экран */
+  transform: translate(-50%, -50%);
+  background-color: black; /* чёрный фон, если видео не перекрывает экран */
 }
 
-
+/* Контент поверх видео */
 .content {
-  position: relative;
-  z-index: 1;
-  color: white;
-  padding: 50px;
+  padding: 30px;
 }
