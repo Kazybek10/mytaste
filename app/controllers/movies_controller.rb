@@ -22,6 +22,12 @@ class MoviesController < ApplicationController
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(@movie, partial: 'movies/form', locals: { movie: @movie })
+      end
+    end
   end
 
   def update

@@ -22,6 +22,12 @@ class RecipesController < ApplicationController
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(@recipe, partial: 'recipes/form', locals: { recipe: @recipe })
+      end
+    end
   end
 
   def update

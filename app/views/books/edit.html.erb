@@ -1,2 +1,11 @@
 <h1>Books#edit</h1>
-<p>Find me in app/views/books/edit.html.erb</p>
+<div class="">
+  <%= simple_form_for @book do |f| %>
+    <%= f.input :title %>
+    <%= f.input :author %>
+    <%= f.input :description %>
+    <%= f.input :publish_year %>
+    <%= f.submit %>
+  <% end %>
+</div>
+<%= link_to "go back", books_path %>

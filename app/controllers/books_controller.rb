@@ -22,6 +22,12 @@ class BooksController < ApplicationController
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(@book, partial: 'books/form', locals: { book: @book })
+      end
+    end
   end
 
   def update

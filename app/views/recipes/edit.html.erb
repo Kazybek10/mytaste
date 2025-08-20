@@ -1,2 +1,10 @@
 <h1>Recipes#edit</h1>
-<p>Find me in app/views/recipes/edit.html.erb</p>
+<<div class="">
+  <%= simple_form_for @recipe do |f| %>
+    <%= f.input :title %>
+    <%= f.input :ingredients %>
+    <%= f.input :instructions %>
+    <%= f.submit %>
+  <% end %>
+</div>
+<%= link_to "go back", recipes_path %>
