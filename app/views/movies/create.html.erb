@@ -1,2 +1,11 @@
 <h1>Movies#create</h1>
-<p>Find me in app/views/movies/create.html.erb</p>
+<div class="">
+  <%= simple_form_for @movie do |f| %>
+    <%= f.input :title %>
+    <%= f.input :director %>
+    <%= f.input :description %>
+    <%= f.input :release_year %>
+    <%= f.submit %>
+  <% end %>
+</div>
+<%= link_to "go back", movies_path %>

@@ -1,2 +1,25 @@
-<h1>Movies#new</h1>
-<p>Find me in app/views/movies/new.html.erb</p>
+<div class="container-new-movie p-5 my-5">
+  <h1>Add New Movie</h1>
+
+  <% if @movie.errors.any? %>
+    <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+      <strong class="font-bold">Объект не может быть сохранен:</strong>
+      <ul class="mt-2 list-disc list-inside">
+        <% @movie.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= simple_form_for @movie do |f| %>
+    <%= f.input :title, label: "Название фильма" %>
+    <%= f.input :description, as: :text, label: "Описание" %>
+    <%= f.input :release_year, label: "Год выпуска" %>
+    <%= f.input :director, label: "Режиссёр" %>
+
+    <div class="form-actions mt-4">
+      <%= f.button :submit, "Создать фильм", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% end %>
+</div>
