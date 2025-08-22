@@ -1,2 +1,11 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<div class="container my-5">
+  <h1 class="text-3xl font-bold mb-4"><%= @book.title %></h1>
+  <p><strong>Автор:</strong> <%= @book.author %></p>
+  <p><strong>Год публикации:</strong> <%= @book.publish_year %></p>
+  <p><strong>Описание:</strong></p>
+  <p><%= @book.description %></p>
+  
+  <%= link_to "Редактировать", edit_book_path(@book) %>
+  <%= button_to "Удалить", book_path(@book), method: :delete %>
+  <%= link_to "Назад к списку", books_path %>
+</div>
