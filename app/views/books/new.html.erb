@@ -1,11 +1,14 @@
-<h1>Books#new</h1>
-<div class="">
+<div class="container-new-book p-5 my-5">
+  <h1>Add New Book</h1>
+
   <%= simple_form_for @book do |f| %>
-    <%= f.input :title %>
-    <%= f.input :author %>
-    <%= f.input :description %>
-    <%= f.input :publish_year %>
-    <%= f.submit %>
+    <%= f.input :title, label: "Название книги" %>
+    <%= f.input :author, label: "Автор" %>
+    <%= f.input :description, as: :text, label: "Описание" %>
+    <%= f.input :publish_year, label: "Год публикации" %>
+
+    <div class="form-actions mt-4">
+      <%= f.button :submit, "Создать книгу", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
   <% end %>
 </div>
-<%= link_to "go back", books_path %>

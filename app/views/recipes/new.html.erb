@@ -1,10 +1,13 @@
-<h1>Recipes#new</h1>
-<div class="">
+<div class="container-new-recipe p-5 my-5">
+  <h1>Add New Recipe</h1>
+
   <%= simple_form_for @recipe do |f| %>
-    <%= f.input :title %>
-    <%= f.input :ingredients %>
-    <%= f.input :instructions %>
-    <%= f.submit %>
+    <%= f.input :title, label: "Название рецепта" %>
+    <%= f.input :ingredients, as: :text, label: "Ингредиенты" %>
+    <%= f.input :instructions, as: :text, label: "Инструкции" %>
+
+    <div class="form-actions mt-4">
+      <%= f.button :submit, "Создать рецепт", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
   <% end %>
 </div>
-<%= link_to "go back", recipes_path %>
