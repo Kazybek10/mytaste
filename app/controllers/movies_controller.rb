@@ -40,7 +40,7 @@ class MoviesController < ApplicationController
 
   def destroy
     @movie.destroy
-    redirect_to movies_path, notice: 'Movie was successfully deleted.'
+    redirect_to movies_path, status: :see_other, notice: 'Movie was successfully deleted.'
   end
 
   private
