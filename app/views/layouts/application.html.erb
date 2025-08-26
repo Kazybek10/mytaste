@@ -11,16 +11,32 @@
   </head>
 
   <body>
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+
+    <nav class="navbar">
+    <div class="navbar-container">
+      <a href="<%= root_path %>" class="navbar-brand">MyTaste</a>
+      <ul class="navbar-menu">
+        <li><a href="<%= movies_path %>" class="navbar-item">Movies</a></li>
+        <li><a href="<%= books_path %>" class="navbar-item">Books</a></li>
+        <li><a href="<%= recipes_path %>" class="navbar-item">Recipes</a></li>
+      </ul>
+      <ul class="navbar-menu" style="margin-left:auto">
+        <% if logged_in? %>
+          <li><span class="navbar-item"><%= current_user.email %></span></li>
+          <li><%= button_to "Sign out", logout_path, method: :delete, class: "navbar-item", form: { style: "display:inline" } %></li>
+        <% else %>
+          <li><a href="<%= login_path %>" class="navbar-item">Sign in</a></li>
+          <li><a href="<%= signup_path %>" class="navbar-item">Sign up</a></li>
+        <% end %>
+      </ul>
+    </div>
+    </nav>
     <%= yield %>
   </body>
-  <nav class="navbar">
-  <div class="navbar-container">
-    <a href="<%= root_path %>" class="navbar-brand">MyTaste</a>
-    <ul class="navbar-menu">
-      <li><a href="<%= movies_path %>" class="navbar-item">Movies</a></li>
-      <li><a href="<%= books_path %>" class="navbar-item">Books</a></li>
-      <li><a href="<%= recipes_path %>" class="navbar-item">Recipes</a></li>
-    </ul>
-  </div>
-</nav>
 </html>
