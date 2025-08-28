@@ -67,3 +67,4 @@ group :test do
 end
 
 gem 'simple_form', require: false
+gem "devise"

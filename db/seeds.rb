@@ -45,3 +45,18 @@ Recipe.create([
   { title: 'By beyond material among foot', ingredients: 'Pork, apples, sage, onion', instructions: 'Roast pork with apples and sage for 1.5 hours' },
   { title: 'Who kid house over', ingredients: 'Duck, orange, honey, thyme', instructions: 'Roast duck with orange glaze for 1 hour' }
 ])
+
+if Rails.env.development?
+  admin_email = ENV.fetch('ADMIN_EMAIL', 'admin@admin.com')
+  admin_password = ENV.fetch('ADMIN_PASSWORD', 'secret123')
+
+  user = User.find_or_initialize_by(email: admin_email)
+  if user.new_record?
+    user.password = admin_password
+    user.password_confirmation = admin_password
+    user.save!
+    puts "Admin created: #{admin_email}"
+  else
+    puts "Admin already exists: #{admin_email}"
+  end
+end

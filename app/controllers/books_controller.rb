@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!, expect: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -51,5 +53,10 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :author, :description, :publish_year)
+  end
+
+  def correct_user
+    @book = current_user.books.find_by(id: params[:id])
+    redirect_to books_path, alert: 'Not authorized' if @book.nil?
   end
 end

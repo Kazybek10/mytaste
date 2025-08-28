@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  before_action :authenticate_user!, expect: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -51,5 +53,10 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:title, :description, :release_year, :director)
+  end
+
+  def correct_user
+    @movie = current_user.movies.find_by(id: params[:id])
+    redirect_to movies_path, alert: 'Not authorized' if @movie.nil?
   end
 end

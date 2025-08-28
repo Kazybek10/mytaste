@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  before_action :authenticate_user!, expect: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -50,5 +52,10 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:title, :ingredients, :instructions)
+  end
+
+  def correct_user
+    @recipe = current_user.recipes.find_by(id: params[:id])
+    redirect_to recipes_path, alert: 'Not authorized' if @recipe.nil?
   end
 end
