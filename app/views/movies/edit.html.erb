@@ -1,12 +1,4 @@
-<h1>Movies#edit</h1>
-<div class="">
-  <%= simple_form_for @movie do |f| %>
-    <%= f.input :title %>
-    <%= f.input :director %>
-    <%= f.input :description %>
-    <%= f.input :release_year %>
-    <%= f.submit %>
-  <% end %>
-</div>
+<h1>Edit Movie</h1>
+<%= render "form", movie: @movie %>
 <%= link_to "go back", movies_path %>
-
+<%= link_to "Show", movie_path(@movie) %> |

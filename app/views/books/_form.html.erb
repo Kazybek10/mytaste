@@ -1,0 +1,7 @@
+<%= form_with(model: book, local: true) do |f| %>
+  <div><%= f.label :title %><%= f.text_field :title %></div>
+  <div><%= f.label :author %><%= f.text_field :author %></div>
+  <div><%= f.label :description %><%= f.text_area :description %></div>
+  <div><%= f.label :publish_year %><%= f.number_field :publish_year %></div>
+  <div><%= f.submit %></div>
+<% end %>

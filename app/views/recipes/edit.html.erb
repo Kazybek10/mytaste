@@ -1,10 +1,4 @@
-<h1>Recipes#edit</h1>
-<div class="">
-  <%= simple_form_for @recipe do |f| %>
-    <%= f.input :title %>
-    <%= f.input :ingredients %>
-    <%= f.input :instructions %>
-    <%= f.submit %>
-  <% end %>
-</div>
+<h1>Edit Recipe</h1>
+<%= render "form", recipe: @recipe %>
 <%= link_to "go back", recipes_path %>
+<%= link_to "Show", recipe_path(@recipe) %>

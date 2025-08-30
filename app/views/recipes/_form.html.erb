@@ -1,0 +1,6 @@
+<%= form_with(model: recipe, local: true) do |f| %>
+  <div><%= f.label :title %><%= f.text_field :title %></div>
+  <div><%= f.label :ingredients %><%= f.text_area :ingredients %></div>
+  <div><%= f.label :instructions %><%= f.text_area :instructions %></div>
+  <div><%= f.submit %></div>
+<% end %>
