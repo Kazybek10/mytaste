@@ -1,16 +1,11 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-# Этот код будет работать во всех средах (разработка, тест, продакшн).
-# Это обеспечивает, что основные данные всегда создаются.
+# Этот код гарантирует, что пользователь будет создан перед созданием других записей
+user = User.find_or_create_by!(email: 'admin@admin.com') do |u|
+  u.password = 'secret123'
+  u.password_confirmation = 'secret123'
+end
 
-Movie.create!([
+# Создаем фильмы
+movies = [
   { title: 'Sister without drive', release_year: 2020, director: 'John Smith', description: 'Короткое описание фильма' },
   { title: 'Almost buy statement', release_year: 2021, director: 'Jane Doe', description: 'Короткое описание фильма' },
   { title: 'Under common', release_year: 2019, director: 'Mike Johnson', description: 'Короткое описание фильма' },
@@ -21,9 +16,17 @@ Movie.create!([
   { title: 'Smile possible', release_year: 2023, director: 'Emma White', description: 'Короткое описание фильма' },
   { title: 'Nor', release_year: 2020, director: 'Chris Lee', description: 'Короткое описание фильма' },
   { title: 'Matter crime charge', release_year: 2021, director: 'Anna Garcia', description: 'Короткое описание фильма' }
-])
+]
+movies.each do |movie_data|
+  Movie.find_or_create_by!(title: movie_data[:title], user: user) do |m|
+    m.release_year = movie_data[:release_year]
+    m.director = movie_data[:director]
+    m.description = movie_data[:description]
+  end
+end
 
-Book.create!([
+# Создаем книги
+books = [
   { title: 'System value employee player record', author: 'Robert Johnson', publish_year: 2015, description: 'Короткое описание книги' },
   { title: 'Up your threat easy letter', author: 'Mary Williams', publish_year: 2016, description: 'Короткое описание книги' },
   { title: 'Laugh single another', author: 'James Brown', publish_year: 2017, description: 'Короткое описание книги' },
@@ -34,9 +37,17 @@ Book.create!([
   { title: 'Evening which', author: 'Susan Martinez', publish_year: 2022, description: 'Короткое описание книги' },
   { title: 'Marriage improve', author: 'Christopher Garcia', publish_year: 2023, description: 'Короткое описание книги' },
   { title: 'Wonder theory', author: 'Jennifer Rodriguez', publish_year: 2024, description: 'Короткое описание книги' }
-])
+]
+books.each do |book_data|
+  Book.find_or_create_by!(title: book_data[:title], user: user) do |b|
+    b.author = book_data[:author]
+    b.publish_year = book_data[:publish_year]
+    b.description = book_data[:description]
+  end
+end
 
-Recipe.create!([
+# Создаем рецепты
+recipes = [
   { title: 'Together bad series another', ingredients: 'Flour, sugar, eggs, milk', instructions: 'Mix all ingredients and bake at 350F for 30 minutes' },
   { title: 'Participant side dream home', ingredients: 'Chicken, rice, vegetables, spices', instructions: 'Cook chicken with spices, serve with rice and vegetables' },
   { title: 'Approach some answer sit cup my', ingredients: 'Beef, potatoes, carrots, onion', instructions: 'Stew beef with vegetables for 2 hours until tender' },
@@ -47,20 +58,10 @@ Recipe.create!([
   { title: 'Scene speak decide exactly wrong half', ingredients: 'Tuna, avocado, cucumber, soy sauce', instructions: 'Mix tuna with vegetables and soy sauce for sushi' },
   { title: 'By beyond material among foot', ingredients: 'Pork, apples, sage, onion', instructions: 'Roast pork with apples and sage for 1.5 hours' },
   { title: 'Who kid house over', ingredients: 'Duck, orange, honey, thyme', instructions: 'Roast duck with orange glaze for 1 hour' }
-])
-
-# Этот блок предназначен только для создания администратора в среде разработки
-if Rails.env.development?
-  admin_email = ENV.fetch('ADMIN_EMAIL', 'admin@admin.com')
-  admin_password = ENV.fetch('ADMIN_PASSWORD', 'secret123')
-
-  user = User.find_or_initialize_by(email: admin_email)
-  if user.new_record?
-    user.password = admin_password
-    user.password_confirmation = admin_password
-    user.save!
-    puts "Admin created: #{admin_email}"
-  else
-    puts "Admin already exists: #{admin_email}"
+]
+recipes.each do |recipe_data|
+  Recipe.find_or_create_by!(title: recipe_data[:title], user: user) do |r|
+    r.ingredients = recipe_data[:ingredients]
+    r.instructions = recipe_data[:instructions]
   end
 end
