@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   def index
-    @movies = Movie.all
+    @movies = current_user.movies
   end
 
   def show
@@ -15,7 +15,7 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = Movie.new(movie_params)
+    @movie = current_user.movies.build(movie_params)
     if @movie.save
       redirect_to @movie, notice: 'Movie was successfully created.'
     else
