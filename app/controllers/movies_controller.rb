@@ -4,7 +4,8 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   def index
-    @movies = current_user.movies
+    movies_scope = current_user.movies.order(created_at: :desc)
+    @pagy, @movies = pagy(movies_scope, items: 2)
   end
 
   def show

@@ -4,7 +4,8 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   def index
-    @recipes = current_user.recipes
+    recipes_scope = current_user.recipes.order(created_at: :desc)
+    @pagy, @recipes = pagy(recipes_scope, items: 2)
   end
 
   def show

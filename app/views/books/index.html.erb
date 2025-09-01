@@ -12,6 +12,8 @@
 <div class="content">
 <h1>Books</h1>
 
+<p>Общее количество книг: <%= @books.count %></p>
+
 <nav>
   <%= link_to "Back to Home", root_path %>
 </nav>
@@ -19,6 +21,10 @@
 <ul>
   <li><%= link_to "New Book", new_book_path %></li>
 </ul>
+
+<div class="pagination-container">
+  <%== pagy_nav(@pagy) if @pagy %>
+</div>
 
 <table>
   <thead>
@@ -39,5 +45,9 @@
     <% end %>
   </tbody>
 </table>
+
+<div class="pagination-container">
+  <%== pagy_nav(@pagy) if @pagy %>
 </div>
 
+</div>

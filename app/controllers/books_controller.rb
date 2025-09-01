@@ -4,7 +4,8 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = current_user.books
+    books_scope = current_user.books.order(created_at: :desc)
+    @pagy, @books = pagy(books_scope, items: 2)
   end
 
   def show
