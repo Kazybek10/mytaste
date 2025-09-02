@@ -171,6 +171,7 @@ GEM
     nokogiri (1.18.9-x86_64-linux-musl)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    ostruct (0.6.3)
     pagy (9.4.0)
     pg (1.6.1)
     pg (1.6.1-aarch64-linux)
@@ -301,6 +302,7 @@ DEPENDENCIES
   devise
   importmap-rails
   jbuilder
+  ostruct
   pagy
   pg (~> 1.1)
   puma (>= 5.0)

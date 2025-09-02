@@ -1,10 +1,14 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user!, expect: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    books_scope = current_user.books.order(created_at: :desc)
+    if user_signed_in?
+      books_scope = current_user.books.order(created_at: :desc)
+    else
+      books_scope = Book.all.order(created_at: :desc)
+    end
     @pagy, @books = pagy(books_scope, items: 2)
   end
 

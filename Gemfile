@@ -69,3 +69,4 @@ end
 gem 'simple_form', require: false
 gem "devise"
 gem "pagy"
+gem "ostruct"

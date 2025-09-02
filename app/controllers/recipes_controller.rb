@@ -1,10 +1,14 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, expect: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   def index
-    recipes_scope = current_user.recipes.order(created_at: :desc)
+    if user_signed_in?
+      recipes_scope = current_user.recipes.order(created_at: :desc)
+    else
+      recipes_scope = Recipe.all.order(created_at: :desc)
+    end
     @pagy, @recipes = pagy(recipes_scope, items: 2)
   end
 

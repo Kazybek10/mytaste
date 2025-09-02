@@ -1,10 +1,14 @@
 class MoviesController < ApplicationController
-  before_action :authenticate_user!, expect: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   def index
-    movies_scope = current_user.movies.order(created_at: :desc)
+    if user_signed_in?
+      movies_scope = current_user.movies.order(created_at: :desc)
+    else
+      movies_scope = Movie.all.order(created_at: :desc)
+    end
     @pagy, @movies = pagy(movies_scope, items: 2)
   end
 
