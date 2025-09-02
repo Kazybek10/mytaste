@@ -13,7 +13,9 @@ class BaseController < ApplicationController
       collection_scope = controller_name.classify.constantize.recent
     end
     
-    @pagy, instance_variable_set("@#{controller_name}", paginate_collection(collection_scope, 2))
+    pagy_result, paginated_collection = paginate_collection(collection_scope, 2)
+    @pagy = pagy_result
+    instance_variable_set("@#{controller_name}", paginated_collection)
   end
 
   def show
