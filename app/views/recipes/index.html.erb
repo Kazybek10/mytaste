@@ -47,5 +47,7 @@
   </tbody>
 </table>
 
-<%== pagy_nav(@pagy) if @pagy %>
+<div class="pagination-container">
+  <%= pagination_nav(@pagy, :recipes_path) %>
+</div>
 </div>

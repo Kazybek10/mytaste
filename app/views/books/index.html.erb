@@ -25,7 +25,7 @@
 <% end %>
 
 <div class="pagination-container">
-  <%== pagy_nav(@pagy) if @pagy %>
+  <%= pagination_nav(@pagy, :books_path) %>
 </div>
 
 <table>
@@ -57,7 +57,7 @@
 </table>
 
 <div class="pagination-container">
-  <%== pagy_nav(@pagy) if @pagy %>
+  <%= pagination_nav(@pagy, :books_path) %>
 </div>
 
 </div>

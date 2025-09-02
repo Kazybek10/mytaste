@@ -12,6 +12,8 @@
 
 <h1>Movies</h1>
 
+
+
 <nav>
   <%= link_to "Back to Home", root_path %>
 </nav>
@@ -50,5 +52,7 @@
   </tbody>
 </table>
 
-<%== pagy_nav(@pagy) if @pagy %>
+<div class="pagination-container">
+  <%= pagination_nav(@pagy, :movies_path) %>
+</div>
 </div>
