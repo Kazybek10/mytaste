@@ -1,11 +1,11 @@
 <div class="container my-5">
   <h1 class="text-3xl font-bold mb-4"><%= @recipe.title %></h1>
-  <p><strong>Ингредиенты:</strong></p>
+  <p><strong>Ingredients:</strong></p>
   <p><%= @recipe.ingredients %></p>
-  <p><strong>Инструкции:</strong></p>
+  <p><strong>Instructions:</strong></p>
   <p><%= @recipe.instructions %></p>
-  
-  <%= link_to "Редактировать", edit_recipe_path(@recipe) %>
-  <%= button_to "Удалить", recipe_path(@recipe), method: :delete %>
-  <%= link_to "Назад к списку", recipes_path %>
+
+  <%= link_to "Edit", edit_recipe_path(@recipe) %>
+  <%= button_to "Delete", recipe_path(@recipe), method: :delete %>
+  <%= link_to "Back to List", recipes_path %>
 </div>

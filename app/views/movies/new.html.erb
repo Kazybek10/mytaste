@@ -3,7 +3,7 @@
 
   <% if @movie.errors.any? %>
     <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
-      <strong class="font-bold">Объект не может быть сохранен:</strong>
+      <strong class="font-bold">Object could not be saved:</strong>
       <ul class="mt-2 list-disc list-inside">
         <% @movie.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -13,13 +13,13 @@
   <% end %>
 
   <%= simple_form_for @movie do |f| %>
-    <%= f.input :title, label: "Название фильма" %>
-    <%= f.input :description, as: :text, label: "Описание" %>
-    <%= f.input :release_year, label: "Год выпуска" %>
-    <%= f.input :director, label: "Режиссёр" %>
+    <%= f.input :title, label: "Movie Title" %>
+    <%= f.input :description, as: :text, label: "Description" %>
+    <%= f.input :release_year, label: "Release Year" %>
+    <%= f.input :director, label: "Director" %>
 
     <div class="form-actions mt-4">
-      <%= f.button :submit, "Создать фильм", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+      <%= f.button :submit, "Add Movie", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
     </div>
   <% end %>
 </div>
