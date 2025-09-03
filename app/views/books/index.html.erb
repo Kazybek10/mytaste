@@ -12,8 +12,6 @@
 <div class="content">
 <h1>Books</h1>
 
-<p>Общее количество книг: <%= @books.count %></p>
-
 <nav>
   <%= link_to "Back to Home", root_path %>
 </nav>
@@ -23,10 +21,6 @@
   <li><%= link_to "New Book", new_book_path %></li>
 </ul>
 <% end %>
-
-<div class="pagination-container">
-  <%= pagination_nav(@pagy, :books_path) %>
-</div>
 
 <table>
   <thead>
