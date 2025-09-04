@@ -1,3 +1,5 @@
+<p style="color: green"><%= notice %></p>
+
 <% content_for :stylesheets do %>
   <%= stylesheet_link_tag "background", "data-turbo-track": "reload" %>
 <% end %>
@@ -23,6 +25,13 @@
   <li><%= link_to "New Movie", new_movie_path %></li>
 </ul>
 <% end %>
+
+<%= form_with url: movies_path, method: :get, local: true do %>
+  <%= text_field_tag :query, params[:query], placeholder: "Search movies...", class: "form-control" %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+
+<hr style="margin-top: 1rem; margin-bottom: 1rem;">
 
 <table>
   <thead>
