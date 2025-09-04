@@ -6,21 +6,20 @@ class BaseController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
- def index
-  if user_signed_in?
-    collection_scope = current_user.send(controller_name).recent
-  else
-    collection_scope = controller_name.classify.constantize.recent
-  end
-  
-  # ADDED: Логика поиска
-  if params[:query].present?
-    collection_scope = collection_scope.where("title ILIKE ?", "%#{params[:query]}%")
-  end
-  
-  pagy_result, paginated_collection = paginate_collection(collection_scope, 2)
-  @pagy = pagy_result
-  instance_variable_set("@#{controller_name}", paginated_collection)
+  def index
+    if user_signed_in?
+      collection_scope = current_user.send(controller_name).recent
+    else
+      collection_scope = controller_name.classify.constantize.recent
+    end
+    
+    if params[:query].present?
+      collection_scope = collection_scope.where("title ILIKE ?", "%#{params[:query]}%")
+    end
+    
+    pagy_result, paginated_collection = paginate_collection(collection_scope, 2)
+    @pagy = pagy_result
+    instance_variable_set("@#{controller_name}", paginated_collection)
   end
 
   def show
@@ -32,12 +31,13 @@ class BaseController < ApplicationController
 
   def create
     resource = current_user.send(controller_name).build(resource_params)
-    instance_variable_set("@#{controller_name.singularize}", resource)
     
     if resource.save
       redirect_to resource, notice: "#{controller_name.classify} was successfully created."
     else
-      render :new
+      # В случае неудачи явно передаем объект с ошибками в представление :new.
+      instance_variable_set("@#{controller_name.singularize}", resource)
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -54,7 +54,9 @@ class BaseController < ApplicationController
     if resource.update(resource_params)
       redirect_to resource, notice: "#{controller_name.classify} was successfully updated."
     else
-      render :edit
+      # В случае неудачи явно передаем объект с ошибками в представление :edit.
+      instance_variable_set("@#{controller_name.singularize}", resource)
+      render :edit, status: :unprocessable_entity
     end
   end
 
