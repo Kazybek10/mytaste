@@ -6,16 +6,21 @@ class BaseController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
-  def index
-    if user_signed_in?
-      collection_scope = current_user.send(controller_name).recent
-    else
-      collection_scope = controller_name.classify.constantize.recent
-    end
-    
-    pagy_result, paginated_collection = paginate_collection(collection_scope, 2)
-    @pagy = pagy_result
-    instance_variable_set("@#{controller_name}", paginated_collection)
+ def index
+  if user_signed_in?
+    collection_scope = current_user.send(controller_name).recent
+  else
+    collection_scope = controller_name.classify.constantize.recent
+  end
+  
+  # ADDED: Логика поиска
+  if params[:query].present?
+    collection_scope = collection_scope.where("title ILIKE ?", "%#{params[:query]}%")
+  end
+  
+  pagy_result, paginated_collection = paginate_collection(collection_scope, 2)
+  @pagy = pagy_result
+  instance_variable_set("@#{controller_name}", paginated_collection)
   end
 
   def show
