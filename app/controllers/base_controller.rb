@@ -33,9 +33,9 @@ class BaseController < ApplicationController
     resource = current_user.send(controller_name).build(resource_params)
     
     if resource.save
-      redirect_to resource, notice: "#{controller_name.classify} was successfully created."
+      flash[:notice] = "#{controller_name.classify} was successfully created."
+      redirect_to resource
     else
-      # В случае неудачи явно передаем объект с ошибками в представление :new.
       instance_variable_set("@#{controller_name.singularize}", resource)
       render :new, status: :unprocessable_entity
     end
@@ -52,9 +52,9 @@ class BaseController < ApplicationController
 
   def update
     if resource.update(resource_params)
-      redirect_to resource, notice: "#{controller_name.classify} was successfully updated."
+      flash[:notice] = "#{controller_name.classify} was successfully updated."
+      redirect_to send("#{controller_name}_path")
     else
-      # В случае неудачи явно передаем объект с ошибками в представление :edit.
       instance_variable_set("@#{controller_name.singularize}", resource)
       render :edit, status: :unprocessable_entity
     end
