@@ -1,0 +1,95 @@
+.movie-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: auto;
+}
+
+@media (min-width: 768px) {
+  .movie-container {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+.card-image {
+  flex-shrink: 0;
+}
+
+.movie-cover {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movie-cover-placeholder {
+  width: 100%;
+  max-width: 400px;
+  height: 600px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movie-details {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.movie-details h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.movie-details p {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+.btn-back,
+.btn-edit,
+.btn-destroy {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px 0;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.btn-back {
+  background-color: #6c757d;
+}
+
+.btn-edit {
+  background-color: #ffc107;
+}
+
+.btn-destroy {
+  background-color: #dc3545;
+}
+
+.btn-back:hover,
+.btn-edit:hover,
+.btn-destroy:hover {
+  opacity: 0.9;
+}

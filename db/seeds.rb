@@ -1,8 +1,12 @@
-# Этот код гарантирует, что пользователь будет создан перед созданием других записей
 user = User.find_or_create_by!(email: 'admin@admin.com') do |u|
   u.password = 'secret123'
   u.password_confirmation = 'secret123'
 end
+
+# Удаляем все существующие записи, чтобы избежать дублирования
+user.books.destroy_all
+user.movies.destroy_all
+user.recipes.destroy_all
 
 # Создаем фильмы
 movies = [
@@ -17,12 +21,23 @@ movies = [
   { title: 'Nor', release_year: 2020, director: 'Chris Lee', description: 'Короткое описание фильма' },
   { title: 'Matter crime charge', release_year: 2021, director: 'Anna Garcia', description: 'Короткое описание фильма' }
 ]
+
 movies.each do |movie_data|
-  Movie.find_or_create_by!(title: movie_data[:title], user: user) do |m|
+  movie = user.movies.find_or_create_by!(title: movie_data[:title]) do |m|
     m.release_year = movie_data[:release_year]
     m.director = movie_data[:director]
     m.description = movie_data[:description]
   end
+  
+  # Генерируем URL изображения-заполнителя на основе названия фильма
+  image_url = "https://placehold.co/600x400/2A2F4F/FFFFFF?text=#{movie.title.gsub(' ', '+')}"
+  
+  # Используем OpenURI для загрузки изображения
+  require "open-uri"
+  
+  # Прикрепляем файл к модели через Active Storage
+  downloaded_image = URI.open(image_url)
+  movie.cover_image.attach(io: downloaded_image, filename: "#{movie.title.parameterize}.png")
 end
 
 # Создаем книги
@@ -65,3 +80,5 @@ recipes.each do |recipe_data|
     r.instructions = recipe_data[:instructions]
   end
 end
+
+puts "Создано #{User.count} пользователей, #{Book.count} книг, #{Movie.count} фильмов и #{Recipe.count} рецептов."
