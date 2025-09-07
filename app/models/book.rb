@@ -1,4 +1,5 @@
 class Book < ApplicationRecord
+  has_one_attached :cover_image
   belongs_to :user, optional: true
 
   validates :title, presence: true, length: { minimum: 2, maximum: 200 }
