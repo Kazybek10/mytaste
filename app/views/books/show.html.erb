@@ -1,11 +1,48 @@
-<div class="container my-5">
-  <h1 class="text-3xl font-bold mb-4"><%= @book.title %></h1>
-  <p><strong>Author:</strong> <%= @book.author %></p>
-  <p><strong>Publication Year:</strong> <%= @book.publish_year %></p>
-  <p><strong>Description:</strong></p>
-  <p><%= @book.description %></p>
+<p style="color: green"><%= notice %></p>
 
-  <%= link_to "Edit", edit_book_path(@book) %>
-  <%= button_to "Delete", book_path(@book), method: :delete %>
-  <%= link_to "Back to List", books_path %>
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag "background", "books_show", "data-turbo-track": "reload" %>
+<% end %>
+
+<div class="background-video">
+  <video autoplay loop muted playsinline id="bg-video">
+    <source src="<%= asset_path('books.mp4') %>" type="video/mp4">
+  </video>
+</div>
+
+<div class="content">
+  <div class="book-details">
+    <div class="card-image">
+      <% if @book.cover_image.attached? && @book.cover_image.image? %>
+        <% begin %>
+          <%= image_tag url_for(@book.cover_image.variant(resize: "400x600>")), class: "book-cover" %>
+        <% rescue StandardError %>
+          <div class="book-cover-placeholder">
+            <span class="placeholder-text">No Image</span>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="book-cover-placeholder">
+          <span class="placeholder-text">No Image</span>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="card-body">
+      <h1><%= @book.title %></h1>
+      <p><strong>Author:</strong> <%= @book.author %></p>
+      <p><strong>Published:</strong> <%= @book.publish_year %></p>
+      <hr>
+      <p><strong>Description:</strong></p>
+      <p><%= @book.description %></p>
+      
+      <div class="actions">
+        <%= link_to "Back to books", books_path %>
+        <% if user_signed_in? && current_user == @book.user %>
+          <%= link_to "Edit", edit_book_path(@book) %>
+          <%= link_to "Destroy", @book, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
