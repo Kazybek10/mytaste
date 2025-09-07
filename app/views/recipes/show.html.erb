@@ -1,11 +1,47 @@
-<div class="container my-5">
-  <h1 class="text-3xl font-bold mb-4"><%= @recipe.title %></h1>
-  <p><strong>Ingredients:</strong></p>
-  <p><%= @recipe.ingredients %></p>
-  <p><strong>Instructions:</strong></p>
-  <p><%= @recipe.instructions %></p>
+<p style="color: green"><%= notice %></p>
 
-  <%= link_to "Edit", edit_recipe_path(@recipe) %>
-  <%= button_to "Delete", recipe_path(@recipe), method: :delete %>
-  <%= link_to "Back to List", recipes_path %>
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag "background", "recipes_show", "data-turbo-track": "reload" %>
+<% end %>
+
+<div class="background-video">
+  <video autoplay loop muted playsinline id="bg-video">
+    <source src="<%= asset_path('recipes.mp4') %>" type="video/mp4">
+  </video>
+</div>
+
+<div class="content">
+  <div class="recipe-details">
+    <div class="card-image">
+      <% if @recipe.cover_image.attached? && @recipe.cover_image.image? %>
+        <% begin %>
+          <%= image_tag url_for(@recipe.cover_image.variant(resize: "400x600>")), class: "recipe-cover" %>
+        <% rescue StandardError %>
+          <div class="recipe-cover-placeholder">
+            <span class="placeholder-text">No Image</span>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="recipe-cover-placeholder">
+          <span class="placeholder-text">No Image</span>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="card-body">
+      <h1><%= @recipe.title %></h1>
+      <p><strong>Ingredients:</strong></p>
+      <p><%= @recipe.ingredients %></p>
+      <p><strong>Instructions:</strong></p>
+      <p><%= @recipe.instructions %></p>
+      
+      <div class="actions">
+        <%= link_to "Back to recipes", recipes_path %>
+        <% if user_signed_in? && current_user == @recipe.user %>
+          <%= link_to "Edit", edit_recipe_path(@recipe) %>
+          <%= link_to "Destroy", @recipe, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
