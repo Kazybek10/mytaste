@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
 <% content_for :stylesheets do %>
-  <%= stylesheet_link_tag "background", "recipes", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "background", "index", "data-turbo-track": "reload" %>
 <% end %>
 
 <div class="background-video">
@@ -10,61 +10,61 @@
   </video>
 </div>
 
-<div class="content">
-<h1>Recipes</h1>
+<div class="header">
+  <h1>My Recipes</h1>
+  <%= link_to "New Recipe", new_recipe_path, class: "new-resource-link" %>
+</div>
 
-<nav>
-  <%= link_to "Back to Home", root_path %>
-</nav>
+<div class="search-sort-container">
+  <div class="search-bar">
+    <%= form_with(url: recipes_path, method: :get, local: true) do %>
+      <%= text_field_tag :query, params[:query], placeholder: "Search recipes by title...", class: "search-input" %>
+      <%= submit_tag "Search", class: "search-button" %>
+    <% end %>
+  </div>
+  <div class="sort-links">
+    <span>Sort by:</span>
+    <%= link_to "Title", recipes_path(sort: "title", query: params[:query]), class: "sort-link" %>
+    <%= link_to "Date", recipes_path(sort: "created_at", query: params[:query]), class: "sort-link" %>
+  </div>
+</div>
 
-<% if user_signed_in? %>
-<ul>
-  <li><%= link_to "New Recipe", new_recipe_path %></li>
-</ul>
-<% end %>
-
-<%= form_with url: recipes_path, method: :get, local: true do %>
-  <%= text_field_tag :query, params[:query], placeholder: "Search recipes...", class: "form-control" %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
-<% end %>
-
-<hr style="margin-top: 1rem; margin-bottom: 1rem;">
-
-<div class="recipe-grid">
-  <% @recipes.each do |recipe| %>
-    <div class="recipe-card">
-      <% if recipe.cover_image.attached? && recipe.cover_image.image? %>
-        <% begin %>
-          <%= link_to recipe_path(recipe) do %>
-            <%= image_tag url_for(recipe.cover_image.variant(resize: "200x300>")), class: "recipe-cover" %>
-          <% end %>
-        <% rescue StandardError %>
-          <div class="recipe-cover-placeholder">
-            <span class="placeholder-text">No Image</span>
+<div id="recipes" class="resource-container">
+  <% if @recipes.empty? %>
+    <p class="no-results">No recipes found.</p>
+  <% else %>
+    <% @recipes.each do |recipe| %>
+      <div class="resource-card">
+        <%= link_to recipe do %>
+          <div class="card-image">
+            <% if recipe.cover_image.attached? && recipe.cover_image.image? %>
+              <% begin %>
+                <%= image_tag url_for(recipe.cover_image.variant(resize_to_limit: [400, 600])), class: "resource-image" %>
+              <% rescue StandardError %>
+                <div class="image-placeholder">
+                  <span class="placeholder-text">No Image</span>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="image-placeholder">
+                <span class="placeholder-text">No Image</span>
+              </div>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title"><%= recipe.title %></h2>
+            <p class="card-text"><strong>Ingredients:</strong> <%= truncate(recipe.ingredients, length: 100) %></p>
+            <p class="card-text"><strong>Instructions:</strong> <%= truncate(recipe.instructions, length: 100) %></p>
           </div>
         <% end %>
-      <% else %>
-        <div class="recipe-cover-placeholder">
-          <span class="placeholder-text">No Image</span>
-        </div>
-      <% end %>
-      <div class="recipe-info">
-        <h3><%= recipe.title %></h3>
-        <p><%= recipe.ingredients %></p>
-        <%= link_to "Show this recipe", recipe_path(recipe) %>
-        <% if user_signed_in? && current_user == recipe.user %>
-          <%= link_to "Edit", edit_recipe_path(recipe) %>
-          <%= link_to "Destroy", recipe_path(recipe), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-        <% end %>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
 
-<div class="pagination-container">
-  <% if defined?(@pagy) && @pagy.pages > 1 %>
-    <%= pagination_nav(@pagy, :recipes_path) %>
+<div class="pagy-container">
+  <% if @pagy.pages > 1 %>
+    <%== pagy_nav(@pagy) %>
   <% end %>
 </div>
-
-</div>
+</div> 

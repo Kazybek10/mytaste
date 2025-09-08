@@ -15,7 +15,7 @@
     <div class="card-image">
       <% if @recipe.cover_image.attached? && @recipe.cover_image.image? %>
         <% begin %>
-          <%= image_tag url_for(@recipe.cover_image.variant(resize: "400x600>")), class: "recipe-cover" %>
+          <%= image_tag url_for(@recipe.cover_image.variant(resize_to_limit: [400, 600])), class: "recipe-cover" %>
         <% rescue StandardError %>
           <div class="recipe-cover-placeholder">
             <span class="placeholder-text">No Image</span>
