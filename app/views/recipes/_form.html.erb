@@ -1,12 +1,36 @@
 <% if recipe.errors.any? %>
-  <ul>
-    <% recipe.errors.full_messages.each do |m| %><li><%= m %></li><% end %>
-  </ul>
+  <div id="error_explanation">
+    <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+    <ul>
+      <% recipe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
-<%= form_with(model: recipe, local: true) do |f| %>
-  <div><%= f.label :title %><%= f.text_field :title %></div>
-  <div><%= f.label :ingredients %><%= f.text_area :ingredients %></div>
-  <div><%= f.label :instructions %><%= f.text_area :instructions %></div>
-  <div><%= f.submit %></div>
+<%= form_with(model: recipe, local: true, html: { multipart: true }, class: "recipe-form") do |form| %>
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :ingredients %>
+    <%= form.text_area :ingredients, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :instructions %>
+    <%= form.text_area :instructions, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :cover_image, "Cover Image" %>
+    <%= form.file_field :cover_image, class: "form-control" %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit "Save", class: "btn-primary" %>
+  </div>
 <% end %>
