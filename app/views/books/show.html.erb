@@ -15,7 +15,7 @@
     <div class="card-image">
       <% if @book.cover_image.attached? && @book.cover_image.image? %>
         <% begin %>
-          <%= image_tag url_for(@book.cover_image.variant(resize: "400x600>")), class: "book-cover" %>
+          <%= image_tag url_for(@book.cover_image.variant(resize_to_limit: [400, 600])), class: "book-cover" %>
         <% rescue StandardError %>
           <div class="book-cover-placeholder">
             <span class="placeholder-text">No Image</span>
@@ -30,11 +30,10 @@
     
     <div class="card-body">
       <h1><%= @book.title %></h1>
-      <p><strong>Author:</strong> <%= @book.author %></p>
-      <p><strong>Published:</strong> <%= @book.publish_year %></p>
-      <hr>
-      <p><strong>Description:</strong></p>
-      <p><%= @book.description %></p>
+      <p><strong>Author:</strong></p>
+      <p><%= @book.author %></p>
+      <p><strong>Genre:</strong></p>
+      <p><%= @book.genre %></p>
       
       <div class="actions">
         <%= link_to "Back to books", books_path %>

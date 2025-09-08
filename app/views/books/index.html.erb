@@ -6,7 +6,7 @@
 
 <div class="background-video">
   <video autoplay loop muted playsinline id="bg-video">
-    <source src="<%= asset_path('movies.mp4') %>" type="video/mp4">
+    <source src="<%= asset_path('books.mp4') %>" type="video/mp4">
   </video>
 </div>
 
@@ -18,9 +18,9 @@
 </nav>
 
 <% if user_signed_in? %>
-<ul>
-  <li><%= link_to "New Book", new_book_path %></li>
-</ul>
+  <ul>
+    <li><%= link_to "New Book", new_book_path %></li>
+  </ul>
 <% end %>
 
 <%= form_with url: books_path, method: :get, local: true do %>
@@ -36,7 +36,7 @@
       <% if book.cover_image.attached? && book.cover_image.image? %>
         <% begin %>
           <%= link_to book_path(book) do %>
-            <%= image_tag url_for(book.cover_image.variant(resize: "200x300>")), class: "book-cover" %>
+            <%= image_tag url_for(book.cover_image.variant(resize_to_limit: [200, 300])), class: "book-cover" %>
           <% end %>
         <% rescue StandardError %>
           <div class="book-cover-placeholder">
