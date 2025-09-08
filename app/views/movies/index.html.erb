@@ -18,9 +18,9 @@
 </nav>
 
 <% if user_signed_in? %>
-<ul>
-  <li><%= link_to "New Movie", new_movie_path %></li>
-</ul>
+  <ul>
+    <li><%= link_to "New Movie", new_movie_path %></li>
+  </ul>
 <% end %>
 
 <%= form_with url: movies_path, method: :get, local: true do %>
@@ -36,7 +36,7 @@
       <% if movie.cover_image.attached? && movie.cover_image.image? %>
         <% begin %>
           <%= link_to movie_path(movie) do %>
-            <%= image_tag url_for(movie.cover_image.variant(resize: "200x300>")), class: "movie-cover" %>
+            <%= image_tag url_for(movie.cover_image.variant(resize_to_limit: [200, 300])), class: "movie-cover" %>
           <% end %>
         <% rescue StandardError %>
           <div class="movie-cover-placeholder">
@@ -50,8 +50,7 @@
       <% end %>
       <div class="movie-info">
         <h3><%= movie.title %></h3>
-        <p><%= movie.director %></p>
-        <p><%= movie.release_year %></p>
+        <p><%= movie.description %></p>
         <%= link_to "Show this movie", movie_path(movie) %>
         <% if user_signed_in? && current_user == movie.user %>
           <%= link_to "Edit", edit_movie_path(movie) %>
