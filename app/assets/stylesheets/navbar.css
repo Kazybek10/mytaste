@@ -27,14 +27,6 @@
     text-decoration: none;
   }
   
-  .navbar-menu {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 2rem;
-  }
-  
   .navbar-item {
     color: white;
     text-decoration: none;
