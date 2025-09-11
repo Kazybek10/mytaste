@@ -13,18 +13,15 @@
 <div class="content">
 <h1>Books</h1>
 
-<nav>
-  <%= link_to "Back to Home", root_path %>
-</nav>
-
-<% if user_signed_in? %>
-  <ul>
-    <li><%= link_to "New Book", new_book_path %></li>
-  </ul>
-<% end %>
+<div class="d-flex justify-content-between align-items-center">
+  <%= link_to "Back to Home", root_path, class: "back-link" %>
+  <% if user_signed_in? %>
+    <%= link_to "Add New", new_book_path, class: "new-item-link" %>
+  <% end %>
+</div>
 
 <%= form_with url: books_path, method: :get, local: true do %>
-  <%= text_field_tag :query, params[:query], placeholder: "Search books...", class: "form-control" %>
+  <%= text_field_tag :query, params[:query], placeholder: "books...", class: "form-control" %>
   <%= submit_tag "Search", class: "search-btn" %>
 <% end %>
 

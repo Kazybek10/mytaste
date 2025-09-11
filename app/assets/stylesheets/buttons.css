@@ -17,3 +17,31 @@
     .search-btn:hover {
     color: #ffd700;
   }
+
+  .back-link {
+    /* Стили для кнопки "Back to Home" */
+    background: transparent;
+    border: 1px solid #ccc;
+    color: #ccc;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.back-link:hover {
+  color: #ffd700;
+}
+
+.new-item-link {
+    /* Стили для кнопки "New Item" */
+    background-color: transparent;
+    border: 1px solid #ccc;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.new-item-link:hover {
+  color: #ffd700;
+}
