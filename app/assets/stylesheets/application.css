@@ -7,47 +7,83 @@
  *
  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
  * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
+ * files in this directory. It is generally better to create a new file per style scope.
  *
  *= require_tree .
  *= require_self
  */
- .categories-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 100px;
-  }
-  
-  .category-circle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-color: #4a90e2;
-    color: white;
-    font-weight: 600;
-    font-size: 18px;
-    text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease;
-  }
-  
-  .category-circle:hover {
-    background-color: #357ABD;
-  }
+.categories-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 100px;
+}
+ 
+.category-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #4a90e2;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+ 
+.category-circle:hover {
+  background-color: #357ABD;
+}
 
-  @import "home.css";
-  @import "navbar.css";
-  @import "notices.css";
-  @import "forms.css";
-  @import "movies.css";
-  @import "movies_show.css";
-  @import "books.css";
-  @import "books_show.css";
-  @import "recipes.css";
-  @import "recipes_show.css";
-  @import "buttons.css";
+@import "home.css";
+@import "navbar.css";
+@import "notices.css";
+@import "forms.css";
+@import "movies.css";
+@import "movies_show.css";
+@import "books.css";
+@import "books_show.css";
+@import "recipes.css";
+@import "recipes_show.css";
+@import "buttons.css";
+
+/* Дополнительные стили для футера */
+body {
+  padding-bottom: 60px; /* Чтобы футер не накладывался на контент */
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.footer-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
