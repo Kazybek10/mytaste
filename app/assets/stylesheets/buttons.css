@@ -7,7 +7,7 @@
   }
   
     .search-btn {
-    color: white;
+    color: black;
     text-decoration: none;
     transition: color 0.3s ease;
     font-weight: 500;
@@ -22,10 +22,11 @@
     /* Стили для кнопки "Back to Home" */
     background: transparent;
     border: 1px solid #ccc;
-    color: #ccc;
+    color: black;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .back-link:hover {
@@ -36,10 +37,11 @@
     /* Стили для кнопки "New Item" */
     background-color: transparent;
     border: 1px solid #ccc;
-    color: white;
+    color: black;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .new-item-link:hover {
