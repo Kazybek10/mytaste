@@ -77,6 +77,11 @@
   color: #080606;
   text-decoration: none;
   font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.recipe-info a:hover {
+  color: gold;
 }
 
 /* Base button styles */
