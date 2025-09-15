@@ -27,7 +27,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
   text-align: center;
-  color: white;
+  color: rgb(13, 10, 10);
 }
 
 .recipe-card:hover {
@@ -68,14 +68,14 @@
 
 .recipe-info p {
   margin: 0 0 5px 0;
-  color: #ccc;
+  color: black;
 }
 
 .recipe-info a {
   display: block;
   margin-top: 10px;
-  color: #fff;
-  text-decoration: underline;
+  color: #080606;
+  text-decoration: none;
   font-size: 0.9rem;
 }
 
@@ -101,3 +101,4 @@
 .btn-primary:hover {
   background-color: #0056b3;
 }
+

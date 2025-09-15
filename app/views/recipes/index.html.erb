@@ -38,13 +38,14 @@
       <div class="recipe-info">
         <h3><%= recipe.title %></h3>
         <p><%= recipe.ingredients %></p>
-        <%= link_to "Show this recipe", recipe_path(recipe) %>
-        <% if user_signed_in? && current_user == recipe.user %>
-          <%= link_to "Edit", edit_recipe_path(recipe) %>
-          <%= link_to "Destroy", recipe_path(recipe), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-        <% end %>
+        <div class="actions">
+          <%= link_to "Show this recipe", recipe_path(recipe) %>
+          <% if user_signed_in? && current_user == recipe.user %>
+            <%= link_to "Edit", edit_recipe_path(recipe) %>
+            <%= link_to "Destroy", recipe_path(recipe), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+          <% end %>
+        </div>
       </div>
-    </div>
   <% end %>
 </div>
 

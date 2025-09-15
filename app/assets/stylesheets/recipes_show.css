@@ -72,9 +72,14 @@
   margin-bottom: 1rem;
 }
 
-.actions a {
+.actions {
+  margin-top: 20px;
   display: inline-block;
-  margin-right: 1rem;
-  color: #fff;
-  text-decoration: underline;
+  padding: 10px 15px;
+  margin: 5px 0;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #050404;
+  font-size: 1rem;
+  text-align: center;
 }
