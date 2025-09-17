@@ -1,95 +1,151 @@
-.movie-container {
+/* Стили для страницы деталей фильма (Movies Show Page) */
+
+body {
+  background-color: #f7f7f7;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.content {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.movie-details {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
 @media (min-width: 768px) {
-  .movie-container {
+  .movie-details {
     flex-direction: row;
-    text-align: left;
   }
 }
 
 .card-image {
   flex-shrink: 0;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .card-image {
+    width: 350px;
+    height: 525px;
+  }
 }
 
 .movie-cover {
   width: 100%;
-  height: auto;
-  max-width: 400px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .movie-cover-placeholder {
   width: 100%;
-  max-width: 400px;
-  height: 600px;
-  background-color: #e0e0e0;
-  border-radius: 8px;
+  height: 525px;
+  background-color: #e5e7eb;
+  color: #9ca3af;
   display: flex;
-  align-items: center;
   justify-content: center;
-  color: #888;
-  font-size: 1.5rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.movie-details {
-  flex-grow: 1;
-  padding: 10px;
-}
-
-.movie-details h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.movie-details p {
+  align-items: center;
+  text-align: center;
   font-size: 1rem;
+  font-weight: 500;
+}
+
+.card-body {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+.card-body h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.2;
+  color: #1a1a1a;
+}
+
+.card-body p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.card-body p strong {
+  font-weight: 600;
+  color: #555;
+  display: block;
   margin-bottom: 5px;
 }
 
 .actions {
+  display: flex;
+  gap: 15px;
   margin-top: 20px;
 }
 
-.btn-back,
-.btn-edit,
-.btn-destroy {
-  display: inline-block;
-  padding: 10px 15px;
-  margin: 5px 0;
-  border-radius: 4px;
+.actions a {
+  padding: 10px 20px;
+  border-radius: 8px;
   text-decoration: none;
-  color: #fff;
-  font-size: 1rem;
-  text-align: center;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.btn-back {
+.actions a:first-child {
   background-color: #6c757d;
+  color: #fff;
 }
 
-.btn-edit {
-  background-color: #ffc107;
+.actions a:first-child:hover {
+  background-color: #5a6268;
 }
 
-.btn-destroy {
+.actions a:nth-child(2) {
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.actions a:nth-child(2):hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.actions a:last-child {
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.actions a:last-child:hover {
   background-color: #dc3545;
+  color: #fff;
 }
 
-.btn-back:hover,
-.btn-edit:hover,
-.btn-destroy:hover {
-  opacity: 0.9;
+/* Стили для маленьких экранов */
+@media (max-width: 767px) {
+  .movie-details {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
