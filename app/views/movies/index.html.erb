@@ -1,41 +1,29 @@
 <p style="color: green"><%= notice %></p>
 
-<div class="content">
 <h1>Movies</h1>
 
-<div class="d-flex justify-content-between align-items-center">
   <%= link_to "Back to Home", root_path, class: "back-link" %>
   <% if user_signed_in? %>
     <%= link_to "Add New", new_movie_path, class: "new-item-link" %>
   <% end %>
-</div>
 
 <%= form_with url: movies_path, method: :get, local: true do %>
   <%= text_field_tag :query, params[:query], placeholder: "movies...", class: "form-control" %>
   <%= submit_tag "Search", class: "search-btn" %>
 <% end %>
 
-<hr style="margin-top: 1rem; margin-bottom: 1rem;">
-
-<div class="movie-grid">
   <% @movies.each do |movie| %>
-    <div class="movie-card">
       <% if movie.cover_image.attached? && movie.cover_image.image? %>
         <% begin %>
           <%= link_to movie_path(movie) do %>
             <%= image_tag url_for(movie.cover_image.variant(resize_to_limit: [200, 300])), class: "movie-cover" %>
           <% end %>
         <% rescue StandardError %>
-          <div class="movie-cover-placeholder">
             <span class="placeholder-text">No Image</span>
-          </div>
         <% end %>
       <% else %>
-        <div class="movie-cover-placeholder">
           <span class="placeholder-text">No Image</span>
-        </div>
       <% end %>
-      <div class="movie-info">
         <h3><%= movie.title %></h3>
         <p><%= movie.description %></p>
         <%= link_to "Show this movie", movie_path(movie) %>
@@ -43,15 +31,8 @@
           <%= link_to "Edit", edit_movie_path(movie) %>
           <%= link_to "Destroy", movie_path(movie), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
         <% end %>
-      </div>
-    </div>
   <% end %>
-</div>
 
-<div class="pagination-container">
   <% if defined?(@pagy) && @pagy.pages > 1 %>
     <%= pagination_nav(@pagy, :movies_path) %>
   <% end %>
-</div>
-
-</div>

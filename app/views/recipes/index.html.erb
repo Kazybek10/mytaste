@@ -1,41 +1,29 @@
 <p style="color: green"><%= notice %></p>
 
-<div class="content">
 <h1>Recipes</h1>
 
-<div class="d-flex justify-content-between align-items-center">
   <%= link_to "Back to Home", root_path, class: "back-link" %>
   <% if user_signed_in? %>
     <%= link_to "Add New", new_recipe_path, class: "new-item-link" %>
   <% end %>
-</div>
 
 <%= form_with url: recipes_path, method: :get, local: true do %>
   <%= text_field_tag :query, params[:query], placeholder: "recipes...", class: "form-control" %>
   <%= submit_tag "Search", class: "search-btn" %>
 <% end %>
 
-<hr style="margin-top: 1rem; margin-bottom: 1rem;">
-
-<div class="recipe-grid">
   <% @recipes.each do |recipe| %>
-    <div class="recipe-card">
       <% if recipe.cover_image.attached? && recipe.cover_image.image? %>
         <% begin %>
           <%= link_to recipe_path(recipe) do %>
             <%= image_tag url_for(recipe.cover_image.variant(resize_to_limit: [200, 300])), class: "recipe-cover" %>
           <% end %>
         <% rescue StandardError %>
-          <div class="recipe-cover-placeholder">
             <span class="placeholder-text">No Image</span>
-          </div>
         <% end %>
       <% else %>
-      <div class="recipe-cover-placeholder">
         <span class="placeholder-text">No Image</span>
-      </div>
       <% end %>
-      <div class="recipe-info">
         <h3><%= recipe.title %></h3>
         <p><%= recipe.ingredients %></p>
         <%= link_to "Show this recipe", recipe_path(recipe) %>
@@ -43,15 +31,9 @@
           <%= link_to "Edit", edit_recipe_path(recipe) %>
           <%= link_to "Destroy", recipe_path(recipe), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
         <% end %>
-      </div>
-    </div>
   <% end %>
-</div>
 
-<div class="pagination-container">
   <% if defined?(@pagy) && @pagy.pages > 1 %>
     <%= pagination_nav(@pagy, :recipes_path) %>
   <% end %>
-</div>
-
-</div>
+  

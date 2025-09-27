@@ -1,41 +1,29 @@
 <p style="color: green"><%= notice %></p>
 
-<div class="content">
 <h1>Books</h1>
 
-<div class="d-flex justify-content-between align-items-center">
   <%= link_to "Back to Home", root_path, class: "back-link" %>
   <% if user_signed_in? %>
     <%= link_to "Add New", new_book_path, class: "new-item-link" %>
   <% end %>
-</div>
 
 <%= form_with url: books_path, method: :get, local: true do %>
   <%= text_field_tag :query, params[:query], placeholder: "books...", class: "form-control" %>
   <%= submit_tag "Search", class: "search-btn" %>
 <% end %>
 
-<hr style="margin-top: 1rem; margin-bottom: 1rem;">
-
-<div class="book-grid">
   <% @books.each do |book| %>
-    <div class="book-card">
       <% if book.cover_image.attached? && book.cover_image.image? %>
         <% begin %>
           <%= link_to book_path(book) do %>
             <%= image_tag url_for(book.cover_image.variant(resize_to_limit: [200, 300])), class: "book-cover" %>
           <% end %>
         <% rescue StandardError %>
-          <div class="book-cover-placeholder">
-            <span class="placeholder-text">No Image</span>
-          </div>
+          <span class="placeholder-text">No Image</span>
         <% end %>
       <% else %>
-        <div class="book-cover-placeholder">
           <span class="placeholder-text">No Image</span>
-        </div>
       <% end %>
-      <div class="book-info">
         <h3><%= book.title %></h3>
         <p><%= book.author %></p>
         <%= link_to "Show this book", book_path(book) %>
@@ -43,15 +31,8 @@
           <%= link_to "Edit", edit_book_path(book) %>
           <%= link_to "Destroy", book_path(book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
         <% end %>
-      </div>
-    </div>
   <% end %>
-</div>
 
-<div class="pagination-container">
   <% if defined?(@pagy) && @pagy.pages > 1 %>
     <%= pagination_nav(@pagy, :books_path) %>
   <% end %>
-</div>
-
-</div>

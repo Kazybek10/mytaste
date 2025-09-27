@@ -1,37 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
-<div class="content">
-  <div class="movie-details">
-    <div class="card-image">
       <% if @movie.cover_image.attached? && @movie.cover_image.image? %>
         <% begin %>
           <%= image_tag url_for(@movie.cover_image.variant(resize_to_limit: [400, 600])), class: "movie-cover" %>
         <% rescue StandardError %>
-          <div class="movie-cover-placeholder">
             <span class="placeholder-text">No Image</span>
-          </div>
         <% end %>
       <% else %>
-        <div class="movie-cover-placeholder">
           <span class="placeholder-text">No Image</span>
-        </div>
       <% end %>
-    </div>
     
-    <div class="card-body">
       <h1><%= @movie.title %></h1>
       <p><strong>Description:</strong></p>
       <p><%= @movie.description %></p>
       <p><strong>Release Year:</strong></p>
       <p><%= @movie.release_year %></p>
       
-      <div class="actions">
         <%= link_to "Back to movies", movies_path %>
         <% if user_signed_in? && current_user == @movie.user %>
           <%= link_to "Edit", edit_movie_path(@movie) %>
           <%= link_to "Destroy", @movie, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
         <% end %>
-      </div>
-    </div>
-  </div>
-</div>
