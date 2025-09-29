@@ -1,38 +1,61 @@
-<p style="color: green"><%= notice %></p>
+<div class="alert alert-success" role="alert"><%= notice %></div>
+<%# The notice container is styled in notices.css %>
+<h1>All Books</h1>
 
-<h1>Books</h1>
-
-  <%= link_to "Back to Home", root_path, class: "back-link" %>
+<nav class="top-actions">
+  <%= link_to "Back to Home", root_path, class: "btn btn-secondary" %>
   <% if user_signed_in? %>
-    <%= link_to "Add New", new_book_path, class: "new-item-link" %>
+    <%= link_to "New Book", new_book_path, class: "btn btn-primary" %>
   <% end %>
+</nav>
 
-<%= form_with url: books_path, method: :get, local: true do %>
-  <%= text_field_tag :query, params[:query], placeholder: "books...", class: "form-control" %>
-  <%= submit_tag "Search", class: "search-btn" %>
-<% end %>
+<div class="search-and-form">
+  <%= form_with url: books_path, method: :get, local: true, class: "search-form" do %>
+    <%= text_field_tag :query, params[:query], placeholder: "Search books...", class: "form-control search-input" %>
+    <%= submit_tag "Search", class: "btn btn-primary search-button" %>
+  <% end %>
+</div>
 
+<hr style="margin-top: 1rem; margin-bottom: 1rem;">
+
+<div class="book-grid">
   <% @books.each do |book| %>
-      <% if book.cover_image.attached? && book.cover_image.image? %>
-        <% begin %>
-          <%= link_to book_path(book) do %>
-            <%= image_tag url_for(book.cover_image.variant(resize_to_limit: [200, 300])), class: "book-cover" %>
+    <div class="book-card">
+      <%# Блок для обложки %>
+      <div class="book-cover-container">
+        <% if book.cover_image.attached? && book.cover_image.image? %>
+          <% begin %>
+            <%= image_tag url_for(book.cover_image.variant(resize_to_limit: [120, 180])), class: "book-cover" %>
+          <% rescue StandardError %>
+            <div class="book-cover-placeholder">
+              <span class="placeholder-text">No Image</span>
+            </div>
           <% end %>
-        <% rescue StandardError %>
-          <span class="placeholder-text">No Image</span>
+        <% else %>
+          <div class="book-cover-placeholder">
+            <span class="placeholder-text">No Image</span>
+          </div>
         <% end %>
-      <% else %>
-          <span class="placeholder-text">No Image</span>
-      <% end %>
-        <h3><%= book.title %></h3>
-        <p><%= book.author %></p>
-        <%= link_to "Show this book", book_path(book) %>
-        <% if user_signed_in? && current_user == book.user %>
-          <%= link_to "Edit", edit_book_path(book) %>
-          <%= link_to "Destroy", book_path(book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-        <% end %>
+      </div>
+      
+      <%# Блок для информации, расположенный рядом с обложкой %>
+      <div class="book-info">
+        <div>
+          <%# Название книги теперь является ссылкой %>
+          <h3><%= link_to book.title, book_path(book), class: "book-title-link" %></h3>
+          <p class="book-author"><%= book.author %></p>
+          <% if book.genre.present? %>
+            <p class="book-genre">Genre: <%= book.genre %></p>
+          <% end %>
+          <p class="book-year">Published: <%= book.publish_year %></p>
+        </div>
+      </div>
+    </div>
   <% end %>
+</div>
 
+<div class="pagination-container">
   <% if defined?(@pagy) && @pagy.pages > 1 %>
     <%= pagination_nav(@pagy, :books_path) %>
   <% end %>
+</div>
