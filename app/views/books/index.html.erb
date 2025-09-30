@@ -11,7 +11,7 @@
 
 <div class="search-and-form">
   <%= form_with url: books_path, method: :get, local: true, class: "search-form" do %>
-    <%= text_field_tag :query, params[:query], placeholder: "Search books...", class: "form-control search-input" %>
+    <%= text_field_tag :query, params[:query], placeholder: "books...", class: "form-control search-input" %>
     <%= submit_tag "Search", class: "btn btn-primary search-button" %>
   <% end %>
 </div>
