@@ -1,39 +1,58 @@
-<p style="color: green"><%= notice %></p>
+<div class="alert alert-notice" role="alert"><%= notice %>
+<%# The notice container is styled in notices.css %>
+<h1>All Recipes</h1>
 
-<h1>Recipes</h1>
-
-  <%= link_to "Back to Home", root_path, class: "back-link" %>
+<nav class="top-actions">
+  <%= link_to "Back to Home", root_path, class: "btn btn-secondary" %>
   <% if user_signed_in? %>
-    <%= link_to "Add New", new_recipe_path, class: "new-item-link" %>
+    <%= link_to "Add New", new_recipe_path, class: "btn btn-primary" %>
   <% end %>
+</nav>
 
-<%= form_with url: recipes_path, method: :get, local: true do %>
-  <%= text_field_tag :query, params[:query], placeholder: "recipes...", class: "form-control" %>
-  <%= submit_tag "Search", class: "search-btn" %>
+<div class="search-and-form">
+<%= form_with url: recipes_path, method: :get, local: true, class: "search-form" do %>
+  <%= text_field_tag :query, params[:query], placeholder: "recipes...", class: "form-control search-input" %>
+  <%= submit_tag "Search", class: "btn btn-primary search-button" %>
 <% end %>
+</div>
 
+<hr style="margin-top: 1rem; margin-bottom: 1rem;">
+
+<div class="recipe-grid">
   <% @recipes.each do |recipe| %>
+      <div class="recipe-card">
+      <%# Блок для обложки %>
+      <div class="recipe-cover-container">
       <% if recipe.cover_image.attached? && recipe.cover_image.image? %>
         <% begin %>
-          <%= link_to recipe_path(recipe) do %>
-            <%= image_tag url_for(recipe.cover_image.variant(resize_to_limit: [200, 300])), class: "recipe-cover" %>
-          <% end %>
+            <%= image_tag url_for(recipe.cover_image.variant(resize_to_limit: [120, 180])), class: "recipe-cover" %>
         <% rescue StandardError %>
+          <div class="recipe-cover-placeholder">
             <span class="placeholder-text">No Image</span>
+          </div>
         <% end %>
       <% else %>
-        <span class="placeholder-text">No Image</span>
+        <div class="recipe-cover-placeholder">
+          <span class="placeholder-text">No Image</span>
+        </div>
       <% end %>
-        <h3><%= recipe.title %></h3>
-        <p><%= recipe.ingredients %></p>
-        <%= link_to "Show this recipe", recipe_path(recipe) %>
-        <% if user_signed_in? && current_user == recipe.user %>
-          <%= link_to "Edit", edit_recipe_path(recipe) %>
-          <%= link_to "Destroy", recipe_path(recipe), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-        <% end %>
-  <% end %>
+      </div>
 
+      <%# Блок для информации, расположенный рядом с обложкой %>
+      <div class="recipe-info">
+        <div>
+          <%# Название рецепта теперь является ссылкой %>
+          <h3><%= link_to recipe.title, recipe_path(recipe), class: "recipe-title" %></h3>
+          <p class="recipe-ingredients"><strong>Ingredients:</strong> <%= truncate(recipe.ingredients, length: 50, separator: ' ') %></p>
+          <p class="recipe-instructions"><%= truncate(recipe.instructions, length: 100) %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="pagination-container">
   <% if defined?(@pagy) && @pagy.pages > 1 %>
     <%= pagination_nav(@pagy, :recipes_path) %>
   <% end %>
-  
+</div>
