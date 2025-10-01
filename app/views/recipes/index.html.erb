@@ -3,9 +3,9 @@
 <h1>All Recipes</h1>
 
 <nav class="top-actions">
-  <%= link_to "Back to Home", root_path, class: "btn btn-secondary" %>
+  <%= link_to "Back to Home", root_path %>
   <% if user_signed_in? %>
-    <%= link_to "Add New", new_recipe_path, class: "btn btn-primary" %>
+    <%= link_to "Add New", new_recipe_path %>
   <% end %>
 </nav>
 

@@ -121,8 +121,8 @@
 }
 
 .recipe-title-link:hover {
-  color: #007bff; 
-  text-decoration: underline;
+  color: gold; 
+  text-decoration: none;
 }
 
 .recipe-info p {

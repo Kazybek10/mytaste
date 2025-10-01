@@ -121,8 +121,8 @@
 }
 
 .movie-title-link:hover {
-  color: #007bff; 
-  text-decoration: underline;
+  color: gold; 
+  text-decoration: none;
 }
 
 .movie-info p {
