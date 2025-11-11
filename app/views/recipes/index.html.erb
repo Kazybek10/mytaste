@@ -42,9 +42,8 @@
       <div class="recipe-info">
         <div>
           <%# Название рецепта теперь является ссылкой %>
-          <h3><%= link_to recipe.title, recipe_path(recipe), class: "recipe-title" %></h3>
+          <h3><%= link_to recipe.title, recipe_path(recipe), class: "recipe-title-link" %></h3>
           <p class="recipe-ingredients"><strong>Ingredients:</strong> <%= truncate(recipe.ingredients, length: 50, separator: ' ') %></p>
-          <p class="recipe-instructions"><%= truncate(recipe.instructions, length: 100) %></p>
         </div>
       </div>
     </div>

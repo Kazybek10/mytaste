@@ -43,10 +43,9 @@
         <div>
           <%# Название фильма теперь является ссылкой %>
           <h3><%= link_to movie.title, movie_path(movie), class: "movie-title-link" %></h3>
-          <p class="movie-description"><%= truncate(movie.description, length: 100) %></p>
           <p class="release-year">Released: <%= movie.release_year %></p>
+          <p class="movie-description"><%= truncate(movie.description, length: 100) %></p>
           <p class="movie-genre">Genre: <%= movie.genre %></p>
-          <p class="movie-director">Director: <%= movie.director %></p>
         </div>
       </div>
     </div>

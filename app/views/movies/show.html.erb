@@ -15,7 +15,8 @@
       <p><%= @movie.description %></p>
       <p><strong>Release Year:</strong></p>
       <p><%= @movie.release_year %></p>
-      
+      <p class="movie-director">Director: <%= @movie.director %></p>
+
         <%= link_to "Back to movies", movies_path %>
         <% if user_signed_in? && current_user == @movie.user %>
           <%= link_to "Edit", edit_movie_path(@movie) %>
