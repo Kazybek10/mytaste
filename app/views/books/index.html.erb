@@ -1,5 +1,4 @@
 <div class="alert alert-success" role="alert"><%= notice %></div>
-<%# The notice container is styled in notices.css %>
 <h1>All Books</h1>
 
 <nav class="top-actions">
@@ -9,53 +8,20 @@
   <% end %>
 </nav>
 
-<div class="search-and-form">
-  <%= form_with url: books_path, method: :get, local: true, class: "search-form" do %>
-    <%= text_field_tag :query, params[:query], placeholder: "books...", class: "form-control search-input" %>
-    <%= submit_tag "Search", class: "btn btn-primary search-button" %>
-  <% end %>
-</div>
+<div data-controller="search" data-search-url-value="<%= books_path %>">
+  <div class="search-and-form">
+    <input
+      type="text"
+      placeholder="books..."
+      class="form-control search-input"
+      data-search-target="input"
+      data-action="input->search#search"
+      value="<%= params[:query] %>">
+  </div>
 
-<hr style="margin-top: 1rem; margin-bottom: 1rem;">
+  <hr style="margin-top: 1rem; margin-bottom: 1rem;">
 
-<div class="book-grid">
-  <% @books.each do |book| %>
-    <div class="book-card">
-      <%# Блок для обложки %>
-      <div class="book-cover-container">
-        <% if book.cover_image.attached? && book.cover_image.image? %>
-          <% begin %>
-            <%= image_tag url_for(book.cover_image.variant(resize_to_limit: [120, 180])), class: "book-cover" %>
-          <% rescue StandardError %>
-            <div class="book-cover-placeholder">
-              <span class="placeholder-text">No Image</span>
-            </div>
-          <% end %>
-        <% else %>
-          <div class="book-cover-placeholder">
-            <span class="placeholder-text">No Image</span>
-          </div>
-        <% end %>
-      </div>
-      
-      <%# Блок для информации, расположенный рядом с обложкой %>
-      <div class="book-info">
-        <div>
-          <%# Название книги теперь является ссылкой %>
-          <h3><%= link_to book.title, book_path(book), class: "book-title-link" %></h3>
-          <p class="book-author"><%= book.author %></p>
-          <% if book.genre.present? %>
-            <p class="book-genre">Genre: <%= book.genre %></p>
-          <% end %>
-          <p class="book-year">Published: <%= book.publish_year %></p>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
-
-<div class="pagination-container">
-  <% if defined?(@pagy) && @pagy.pages > 1 %>
-    <%= pagination_nav(@pagy, :books_path) %>
-  <% end %>
+  <div data-search-target="results">
+    <%= render "books_list" %>
+  </div>
 </div>
