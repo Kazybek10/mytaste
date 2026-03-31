@@ -66,10 +66,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'simple_form', require: false
 gem "devise"
 gem "pagy"
-gem "ostruct"
 gem 'image_processing', '~> 1.2'
 gem 'ruby-vips'
 

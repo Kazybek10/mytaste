@@ -36,7 +36,7 @@
 
   <div class="pagination-container">
     <% if defined?(@pagy) && @pagy.pages > 1 %>
-      <%= pagination_nav(@pagy, :recipes_path) %>
+      <%= pagy_nav(@pagy) %>
     <% end %>
   </div>
 </div>

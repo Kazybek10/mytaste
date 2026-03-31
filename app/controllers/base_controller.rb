@@ -17,8 +17,7 @@ class BaseController < ApplicationController
     collection_scope = collection_scope.where("title ILIKE ?", "%#{params[:query]}%")
   end
 
-  pagy_result, paginated_collection = paginate_collection(collection_scope, 5)
-  @pagy = pagy_result
+  @pagy, paginated_collection = pagy(collection_scope)
   instance_variable_set("@#{controller_name}", paginated_collection)
 
   respond_to do |format|
