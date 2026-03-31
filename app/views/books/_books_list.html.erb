@@ -25,6 +25,13 @@
               <p class="book-genre">Genre: <%= book.genre %></p>
             <% end %>
             <p class="book-year">Published: <%= book.publish_year %></p>
+            <% if user_signed_in? %>
+              <div data-star-rating
+                   data-initial-rating="<%= book.rating || 0 %>"
+                   data-resource-type="books"
+                   data-resource-id="<%= book.id %>">
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

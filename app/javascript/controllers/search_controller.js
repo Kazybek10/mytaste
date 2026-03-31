@@ -28,6 +28,7 @@ export default class extends Controller {
       .then(html => {
         console.log("Got response!")
         this.resultsTarget.innerHTML = html
+        window.mountStarRating?.()
       })
     }, 300)
   }

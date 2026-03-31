@@ -21,6 +21,13 @@
           <div>
             <h3><%= link_to recipe.title, recipe_path(recipe), class: "recipe-title-link" %></h3>
             <p class="recipe-ingredients"><strong>Ingredients:</strong> <%= truncate(recipe.ingredients, length: 50, separator: ' ') %></p>
+            <% if user_signed_in? %>
+              <div data-star-rating
+                   data-initial-rating="<%= recipe.rating || 0 %>"
+                   data-resource-type="recipes"
+                   data-resource-id="<%= recipe.id %>">
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
