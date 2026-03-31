@@ -7,20 +7,30 @@ class BaseController < ApplicationController
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
   def index
-    if user_signed_in?
-      collection_scope = current_user.send(controller_name).recent
-    else
-      collection_scope = controller_name.classify.constantize.recent
-    end
-    
-    if params[:query].present?
-      collection_scope = collection_scope.where("title ILIKE ?", "%#{params[:query]}%")
-    end
-    
-    pagy_result, paginated_collection = paginate_collection(collection_scope, 5)
-    @pagy = pagy_result
-    instance_variable_set("@#{controller_name}", paginated_collection)
+  if user_signed_in?
+    collection_scope = current_user.send(controller_name).recent
+  else
+    collection_scope = controller_name.classify.constantize.recent
   end
+
+  if params[:query].present?
+    collection_scope = collection_scope.where("title ILIKE ?", "%#{params[:query]}%")
+  end
+
+  pagy_result, paginated_collection = paginate_collection(collection_scope, 5)
+  @pagy = pagy_result
+  instance_variable_set("@#{controller_name}", paginated_collection)
+
+  respond_to do |format|
+    format.html do
+      if request.headers["X-Search-Request"]
+        render partial: "#{controller_name}/#{controller_name}_list"
+        else
+        render :index
+      end
+    end
+  end
+ end
 
   def show
   end
