@@ -1,4 +1,8 @@
-<h1>Edit Book</h1>
-<%= render "form", book: @book %>
-<%= link_to "Show", book_path(@book) %> |
-<%= link_to "Back to List", books_path %>
+<div class="page-wrapper">
+  <div class="top-actions">
+    <h1>Edit Book</h1>
+    <%= link_to "← Back", book_path(@book), class: "btn-outline" %>
+  </div>
+
+  <%= render "form", book: @book %>
+</div>

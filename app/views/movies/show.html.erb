@@ -1,24 +1,44 @@
-<p style="color: green"><%= notice %></p>
-
+<div class="page-wrapper">
+  <div class="show-card">
+    <div class="show-cover-container">
       <% if @movie.cover_image.attached? && @movie.cover_image.image? %>
         <% begin %>
-          <%= image_tag url_for(@movie.cover_image.variant(resize_to_limit: [400, 600])), class: "movie-cover" %>
+          <%= image_tag url_for(@movie.cover_image.variant(resize_to_limit: [400, 600])), class: "show-cover" %>
         <% rescue StandardError %>
-            <span class="placeholder-text">No Image</span>
+          <div class="show-cover-placeholder"><span>No Image</span></div>
         <% end %>
       <% else %>
-          <span class="placeholder-text">No Image</span>
+        <div class="show-cover-placeholder"><span>No Image</span></div>
       <% end %>
-    
-      <h1><%= @movie.title %></h1>
-      <p><strong>Description:</strong></p>
-      <p><%= @movie.description %></p>
-      <p><strong>Release Year:</strong></p>
-      <p><%= @movie.release_year %></p>
-      <p class="movie-director">Director: <%= @movie.director %></p>
+    </div>
 
-        <%= link_to "Back to movies", movies_path %>
-        <% if user_signed_in? && current_user == @movie.user %>
-          <%= link_to "Edit", edit_movie_path(@movie) %>
-          <%= link_to "Destroy", @movie, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    <div class="show-info">
+      <h1><%= @movie.title %></h1>
+
+      <div class="show-meta">
+        <p><span class="meta-label">Released:</span> <%= @movie.release_year %></p>
+        <% if @movie.director.present? %>
+          <p><span class="meta-label">Director:</span> <%= @movie.director %></p>
         <% end %>
+        <% if @movie.genre.present? %>
+          <p><span class="meta-label">Genre:</span> <%= @movie.genre %></p>
+        <% end %>
+      </div>
+
+      <% if @movie.description.present? %>
+        <div class="show-description">
+          <span class="meta-label">Description</span>
+          <p><%= @movie.description %></p>
+        </div>
+      <% end %>
+
+      <div class="show-actions">
+        <%= link_to "← Back to Movies", movies_path, class: "btn-outline" %>
+        <% if user_signed_in? && current_user == @movie.user %>
+          <%= link_to "Edit", edit_movie_path(@movie), class: "btn-outline" %>
+          <%= link_to "Delete", @movie, class: "btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

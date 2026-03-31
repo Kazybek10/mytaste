@@ -1,24 +1,41 @@
-<p style="color: green"><%= notice %></p>
-
+<div class="page-wrapper">
+  <div class="show-card">
+    <div class="show-cover-container">
       <% if @recipe.cover_image.attached? && @recipe.cover_image.image? %>
         <% begin %>
-          <%= image_tag url_for(@recipe.cover_image.variant(resize_to_limit: [400, 600])), class: "recipe-cover" %>
+          <%= image_tag url_for(@recipe.cover_image.variant(resize_to_limit: [400, 600])), class: "show-cover" %>
         <% rescue StandardError %>
-            <span class="placeholder-text">No Image</span>
+          <div class="show-cover-placeholder"><span>No Image</span></div>
         <% end %>
       <% else %>
-          <span class="placeholder-text">No Image</span>
+        <div class="show-cover-placeholder"><span>No Image</span></div>
+      <% end %>
+    </div>
+
+    <div class="show-info">
+      <h1><%= @recipe.title %></h1>
+
+      <% if @recipe.ingredients.present? %>
+        <div class="show-description">
+          <span class="meta-label">Ingredients</span>
+          <p><%= @recipe.ingredients %></p>
+        </div>
       <% end %>
 
-      <h1><%= @recipe.title %></h1>
-      <p><strong>Ingredients:</strong></p>
-      <p><%= @recipe.ingredients %></p>
-      <p><strong>Instructions:</strong></p>
-      <p><%= @recipe.instructions %></p>
-      
-        <%= link_to "Back to recipes", recipes_path %>
+      <% if @recipe.instructions.present? %>
+        <div class="show-description">
+          <span class="meta-label">Instructions</span>
+          <p><%= @recipe.instructions %></p>
+        </div>
+      <% end %>
+
+      <div class="show-actions">
+        <%= link_to "← Back to Recipes", recipes_path, class: "btn-outline" %>
         <% if user_signed_in? && current_user == @recipe.user %>
-          <%= link_to "Edit", edit_recipe_path(@recipe) %>
-          <%= link_to "Destroy", @recipe, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+          <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn-outline" %>
+          <%= link_to "Delete", @recipe, class: "btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
         <% end %>
-        
+      </div>
+    </div>
+  </div>
+</div>

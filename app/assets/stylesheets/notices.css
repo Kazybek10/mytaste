@@ -1,16 +1,19 @@
 .alert {
-  padding: 1rem;
+  padding: 0.875rem 1rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
-  border-radius: 0.25rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
 }
+
 .alert-success {
-  color: #0f5132;
-  background-color: #d1e7dd;
-  border-color: #badbcc;
+  color: #a0d4a0;
+  background-color: #0d2010;
+  border-color: #1a4020;
 }
+
 .alert-danger {
-  color: #842029;
-  background-color: #f8d7da;
-  border-color: #f5c2c7;
+  color: #e08080;
+  background-color: #2a1010;
+  border-color: #5a2020;
 }

@@ -1,27 +1,26 @@
-<div class="alert alert-success" role="alert"><%= notice %></div>
-<h1>All Recipes</h1>
-
-<nav class="top-actions">
-  <%= link_to "Back to Home", root_path %>
-  <% if user_signed_in? %>
-    <%= link_to "Add New", new_recipe_path %>
-  <% end %>
-</nav>
-
-<div data-controller="search" data-search-url-value="<%= recipes_path %>">
-  <div class="search-and-form">
-    <input
-      type="text"
-      placeholder="recipes..."
-      class="form-control search-input"
-      data-search-target="input"
-      data-action="input->search#search"
-      value="<%= params[:query] %>">
+<div class="page-wrapper">
+  <div class="top-actions">
+    <h1>Recipes</h1>
+    <% if user_signed_in? %>
+      <%= link_to "+ Add Recipe", new_recipe_path, class: "new-item-link" %>
+    <% end %>
   </div>
 
-  <hr style="margin-top: 1rem; margin-bottom: 1rem;">
+  <div data-controller="search" data-search-url-value="<%= recipes_path %>">
+    <div class="search-and-form">
+      <input
+        type="text"
+        placeholder="Search recipes..."
+        class="search-input"
+        data-search-target="input"
+        data-action="input->search#search"
+        value="<%= params[:query] %>">
+    </div>
 
-  <div data-search-target="results">
-    <%= render "recipes_list" %>
+    <hr>
+
+    <div data-search-target="results">
+      <%= render "recipes_list" %>
+    </div>
   </div>
 </div>

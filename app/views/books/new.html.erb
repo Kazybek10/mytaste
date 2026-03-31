@@ -1,3 +1,8 @@
-<h1>New Book</h1>
-<%= render "form", book: @book %>
-<%= link_to "Back", books_path %>
+<div class="page-wrapper">
+  <div class="top-actions">
+    <h1>Add New Book</h1>
+    <%= link_to "← Back to Books", books_path, class: "btn-outline" %>
+  </div>
+
+  <%= render "form", book: @book %>
+</div>
