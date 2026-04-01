@@ -1,20 +1,32 @@
-<h2>Log in</h2>
+<div class="page-wrapper">
+  <div class="movie-form" style="margin: 0 auto;">
+    <h1>Log in</h1>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem;">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me, style: "margin: 0; font-weight: normal; text-transform: none; font-size: 0.9rem; color: #a0a0a0;" %>
+        </div>
+      <% end %>
+
+      <div class="form-actions">
+        <%= f.submit "Log in", class: "btn-primary" %>
+      </div>
+    <% end %>
+
+    <div style="margin-top: 1.5rem; font-size: 0.875rem; color: #777;">
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
