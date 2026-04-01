@@ -1,9 +1,11 @@
 /* Стили для домашней страницы */
 .home-container {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-  }
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  margin-top: -70px;
+  margin-bottom: -60px;
+}
   
   .video-background {
     position: absolute;
@@ -58,18 +60,24 @@
   }
   
   .cta-button {
-    padding: 1rem 2rem;
-    border: 2px solid white;
-    background: transparent;
-    color: white;
+    padding: 1.5rem 3.5rem;
+    border: 2px solid #ffffff;
+    background: rgba(0, 0, 0, 0.45);
+    color: #ffffff;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: serif;
     transition: all 0.3s ease;
-    font-weight: bold;
+    backdrop-filter: blur(4px);
   }
-  
+
   .cta-button:hover {
-    background: white;
-    color: black;
-    transform: translateY(-2px);
+    background: #ffd700;
+    color: #0f0f0f;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.35);
   }

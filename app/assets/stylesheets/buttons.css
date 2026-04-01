@@ -1,11 +1,3 @@
-.navbar-buttons {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 2rem;
-}
-
 .top-actions {
   display: flex;
   justify-content: space-between;
@@ -17,52 +9,44 @@
   margin-bottom: 0;
 }
 
-.search-btn {
-  color: #a0a0a0;
-  text-decoration: none;
-  font-weight: 500;
+.back-link,
+.new-item-link,
+.btn-outline {
   background: transparent;
-  border: none;
+  border: 1px solid #3a3a3a;
+  color: #a0a0a0;
+  padding: 0.45rem 1.1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-family: serif;
+  font-weight: 500;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  display: inline-block;
+}
+
+.back-link:hover,
+.new-item-link:hover,
+.btn-outline:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.btn-danger {
+  background: transparent;
+  color: #e05555;
+  border: 1px solid #5a2020;
+  padding: 0.45rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: serif;
+  font-weight: 500;
   cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.search-btn:hover {
-  color: #ffd700;
-}
-
-.back-link {
-  background: transparent;
-  border: 1px solid #3a3a3a;
-  color: #a0a0a0;
-  padding: 0.45rem 1.1rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
   display: inline-block;
 }
 
-.back-link:hover {
-  border-color: #ffd700;
-  color: #ffd700;
-}
-
-.new-item-link {
-  background: transparent;
-  border: 1px solid #3a3a3a;
-  color: #a0a0a0;
-  padding: 0.45rem 1.1rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: border-color 0.2s ease, color 0.2s ease;
-  display: inline-block;
-}
-
-.new-item-link:hover {
-  border-color: #ffd700;
-  color: #ffd700;
+.btn-danger:hover {
+  background-color: #5a2020;
+  color: #ff8080;
 }

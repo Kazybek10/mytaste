@@ -40,7 +40,7 @@
 
   <div class="pagination-container">
     <% if defined?(@pagy) && @pagy.pages > 1 %>
-      <%= pagy_nav(@pagy) %>
+      <%= raw pagy_nav(@pagy) %>
     <% end %>
   </div>
 </div>

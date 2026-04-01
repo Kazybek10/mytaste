@@ -20,8 +20,8 @@
 }
 
 .pagy-nav .page:hover {
-  border-color: #ffd700;
-  color: #ffd700;
+  border-color: #ffffff;
+  color: #ffffff;
 }
 
 .pagy-nav .page.active {
@@ -58,8 +58,8 @@
 
 .pagy-nav .prev:hover,
 .pagy-nav .next:hover {
-  border-color: #ffd700;
-  color: #ffd700;
+  border-color: #ffffff;
+  color: #ffffff;
 }
 
 .pagy-nav .prev.disabled,

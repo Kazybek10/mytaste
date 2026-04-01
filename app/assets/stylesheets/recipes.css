@@ -26,8 +26,8 @@
 
 .search-input:focus {
   outline: none;
-  border-color: #ffd700;
-  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.12);
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
 }
 
 .search-button {
@@ -109,7 +109,7 @@
 }
 
 .recipe-title-link:hover {
-  color: #ffd700;
+  color: #ffffff;
 }
 
 .recipe-info p {
