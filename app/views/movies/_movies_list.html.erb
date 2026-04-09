@@ -2,35 +2,37 @@
   <div class="movie-grid">
     <% @movies.each do |movie| %>
       <div class="movie-card">
-        <div class="movie-cover-container">
-          <% if movie.cover_image.attached? && movie.cover_image.image? %>
-            <% begin %>
-              <%= image_tag url_for(movie.cover_image.variant(resize_to_limit: [120, 180])), class: "movie-cover" %>
-            <% rescue StandardError %>
-              <div class="movie-cover-placeholder">
-                <span class="placeholder-text">No Image</span>
-              </div>
-            <% end %>
-          <% else %>
-            <div class="movie-cover-placeholder">
-              <span class="placeholder-text">No Image</span>
-            </div>
-          <% end %>
-        </div>
-        <div class="movie-info">
-          <div>
-            <h3><%= link_to movie.title, movie_path(movie), class: "movie-title-link" %></h3>
-            <p class="release-year">Released: <%= movie.release_year %></p>
-            <p class="movie-description"><%= truncate(movie.description, length: 100) %></p>
-            <p class="movie-genre">Genre: <%= movie.genre %></p>
-            <% if user_signed_in? %>
-              <div data-star-rating
-                   data-initial-rating="<%= movie.rating || 0 %>"
-                   data-resource-type="movies"
-                   data-resource-id="<%= movie.id %>">
-              </div>
+        <%= link_to movie_path(movie), class: "movie-card-link" do %>
+          <div class="movie-cover-container">
+            <% if movie.cover_image.attached? && movie.cover_image.image? %>
+              <% begin %>
+                <%= image_tag url_for(movie.cover_image.variant(resize_to_limit: [240, 360])), class: "movie-cover" %>
+              <% rescue StandardError %>
+                <div class="movie-cover-placeholder"><span class="placeholder-text">No Image</span></div>
+              <% end %>
+            <% else %>
+              <div class="movie-cover-placeholder"><span class="placeholder-text">No Image</span></div>
             <% end %>
           </div>
+          <h3 class="movie-title"><%= movie.title %></h3>
+        <% end %>
+        <div class="movie-info">
+          <% if movie.director.present? %>
+            <p class="movie-director"><%= movie.director %></p>
+          <% end %>
+          <% if movie.release_year.present? %>
+            <p class="movie-year"><%= movie.release_year %></p>
+          <% end %>
+          <% if movie.genre.present? %>
+            <p class="movie-genre"><%= movie.genre %></p>
+          <% end %>
+          <% if user_signed_in? %>
+            <div data-star-rating
+                 data-initial-rating="<%= movie.rating || 0 %>"
+                 data-resource-type="movies"
+                 data-resource-id="<%= movie.id %>">
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>
