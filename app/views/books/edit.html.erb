@@ -1,8 +1,6 @@
-<div class="page-wrapper">
-  <div class="top-actions">
-    <h1>Edit Book</h1>
-    <%= link_to "← Back", book_path(@book), class: "btn-outline" %>
+<turbo-frame id="modal-content">
+  <div class="modal-form-wrapper">
+    <h2 class="modal-form-title">Edit Book</h2>
+    <%= render "form", book: @book %>
   </div>
-
-  <%= render "form", book: @book %>
-</div>
+</turbo-frame>

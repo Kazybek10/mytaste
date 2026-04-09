@@ -75,29 +75,89 @@
   transform: rotateX(90deg) translateZ(20px);
 }
 
-/* === MARQUEE === */
-.navbar-marquee {
+/* === GLOBAL SEARCH === */
+.navbar-search {
   flex: 1;
-  overflow: hidden;
   margin: 0 2rem;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  position: relative;
 }
 
-.navbar-marquee span {
-  display: inline-block;
-  white-space: nowrap;
-  color: #888;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.navbar-search-input {
+  width: 100%;
+  padding: 0.45rem 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid #2a2a2a;
+  border-radius: 20px;
+  color: #e0e0e0;
   font-family: serif;
-  animation: marquee 22s linear infinite;
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 
-@keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.navbar-search-input::placeholder {
+  color: #555;
+}
+
+.navbar-search-input:focus {
+  outline: none;
+  border-color: #555;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.navbar-search-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 2000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-search-dropdown.active {
+  display: block;
+}
+
+.gs-category {
+  padding: 0.4rem 1rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #555;
+  background: #141414;
+  font-family: serif;
+}
+
+.gs-item {
+  display: block;
+  padding: 0.55rem 1rem;
+  color: #c0c0c0;
+  font-size: 0.875rem;
+  font-family: serif;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+  border-bottom: 1px solid #1f1f1f;
+}
+
+.gs-item:last-child {
+  border-bottom: none;
+}
+
+.gs-item:hover {
+  background: #222;
+  color: #ffffff;
+}
+
+.gs-empty {
+  padding: 1rem;
+  color: #555;
+  font-size: 0.875rem;
+  text-align: center;
+  font-family: serif;
 }
 
 /* === NAV LINKS === */

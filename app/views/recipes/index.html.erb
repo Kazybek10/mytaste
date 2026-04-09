@@ -2,25 +2,13 @@
   <div class="top-actions">
     <h1>Recipes</h1>
     <% if user_signed_in? %>
-      <%= link_to "+ Add Recipe", new_recipe_path, class: "new-item-link" %>
+      <%= link_to "+ Add Recipe", new_recipe_path,
+          class: "new-item-link",
+          data: { turbo_frame: "modal-content" } %>
     <% end %>
   </div>
 
-  <div data-controller="search" data-search-url-value="<%= recipes_path %>">
-    <div class="search-and-form">
-      <input
-        type="text"
-        placeholder="Search recipes..."
-        class="search-input"
-        data-search-target="input"
-        data-action="input->search#search"
-        value="<%= params[:query] %>">
-    </div>
+  <hr>
 
-    <hr>
-
-    <div data-search-target="results">
-      <%= render "recipes_list" %>
-    </div>
-  </div>
+  <%= render "recipes_list" %>
 </div>

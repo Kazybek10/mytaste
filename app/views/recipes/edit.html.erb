@@ -1,8 +1,6 @@
-<div class="page-wrapper">
-  <div class="top-actions">
-    <h1>Edit Recipe</h1>
-    <%= link_to "← Back", recipe_path(@recipe), class: "btn-outline" %>
+<turbo-frame id="modal-content">
+  <div class="modal-form-wrapper">
+    <h2 class="modal-form-title">Edit Recipe</h2>
+    <%= render "form", recipe: @recipe %>
   </div>
-
-  <%= render "form", recipe: @recipe %>
-</div>
+</turbo-frame>

@@ -163,6 +163,68 @@ h1 {
   color: #ff8080;
 }
 
+/* === MODAL === */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 9000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop.active {
+  display: flex;
+}
+
+.modal-box {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 2rem;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s ease;
+  padding: 0.25rem 0.5rem;
+}
+
+.modal-close-btn:hover {
+  color: #ffffff;
+}
+
+.modal-form-title {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-family: serif;
+  margin: 0 0 1.5rem 0;
+}
+
+.modal-form-wrapper .movie-form,
+.modal-form-wrapper .book-form,
+.modal-form-wrapper .recipe-form {
+  background: transparent;
+  border: none;
+  padding: 0;
+  max-width: 100%;
+}
+
 /* === SHOW PAGE (shared across movies, books, recipes) === */
 .show-card {
   background-color: #1c1c1c;

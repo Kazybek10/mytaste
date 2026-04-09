@@ -21,8 +21,14 @@
           <span>MyTaste</span>
         </a>
 
-        <div class="navbar-marquee">
-          <span> Welcome to MyTaste &nbsp;&nbsp;&nbsp; Discover your favorite movies, books, and recipes &nbsp;&nbsp;&nbsp; Welcome to MyTaste &nbsp;&nbsp;&nbsp; Discover your favorite movies, books, and recipes &nbsp;&nbsp;&nbsp;</span>
+        <div class="navbar-search" data-controller="global-search">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="navbar-search-input"
+            data-global-search-target="input"
+            data-action="input->global-search#search">
+          <div class="navbar-search-dropdown" data-global-search-target="dropdown"></div>
         </div>
 
         <ul class="navbar-buttons">
@@ -47,6 +53,13 @@
         </div>
       </div>
     <% end %>
+
+    <div id="modal-backdrop" class="modal-backdrop" data-controller="modal" data-action="click->modal#backdropClick">
+      <div class="modal-box" data-modal-target="box">
+        <button class="modal-close-btn" data-action="click->modal#close">✕</button>
+        <turbo-frame id="modal-content"></turbo-frame>
+      </div>
+    </div>
 
     <%= yield %>
 

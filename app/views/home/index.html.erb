@@ -2,14 +2,44 @@
   <video class="video-background" autoplay muted loop>
     <source src="<%= asset_path('background-video.mp4') %>" type="video/mp4">
   </video>
-  
+
   <div class="overlay"></div>
-  
+
   <div class="content">
-    <div class="cta-buttons">
-      <a href="<%= movies_path %>" class="cta-button"> Movies</a>
-      <a href="<%= books_path %>" class="cta-button"> Books</a>
-      <a href="<%= recipes_path %>" class="cta-button"> Recipes</a>
+    <div class="cta-cards">
+      <a href="<%= movies_path %>" class="cta-card">
+        <svg class="cta-card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="2"/>
+          <line x1="7" y1="2" x2="7" y2="22"/>
+          <line x1="17" y1="2" x2="17" y2="22"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <line x1="2" y1="7" x2="7" y2="7"/>
+          <line x1="17" y1="7" x2="22" y2="7"/>
+          <line x1="17" y1="17" x2="22" y2="17"/>
+          <line x1="2" y1="17" x2="7" y2="17"/>
+        </svg>
+        <div class="cta-card-title">Movies</div>
+        <div class="cta-card-desc">Track the films you love</div>
+      </a>
+
+      <a href="<%= books_path %>" class="cta-card">
+        <svg class="cta-card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <div class="cta-card-title">Books</div>
+        <div class="cta-card-desc">Your personal reading list</div>
+      </a>
+
+      <a href="<%= recipes_path %>" class="cta-card">
+        <svg class="cta-card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+          <path d="M7 2v20"/>
+          <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/>
+        </svg>
+        <div class="cta-card-title">Recipes</div>
+        <div class="cta-card-desc">Save your favourite recipes</div>
+      </a>
     </div>
   </div>
 </div>

@@ -1,8 +1,6 @@
-<div class="page-wrapper">
-  <div class="top-actions">
-    <h1>Add New Movie</h1>
-    <%= link_to "← Back to Movies", movies_path, class: "btn-outline" %>
+<turbo-frame id="modal-content">
+  <div class="modal-form-wrapper">
+    <h2 class="modal-form-title">Add New Movie</h2>
+    <%= render "form", movie: @movie %>
   </div>
-
-  <%= render "form", movie: @movie %>
-</div>
+</turbo-frame>

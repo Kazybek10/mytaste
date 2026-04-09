@@ -2,25 +2,13 @@
   <div class="top-actions">
     <h1>Books</h1>
     <% if user_signed_in? %>
-      <%= link_to "+ Add Book", new_book_path, class: "new-item-link" %>
+      <%= link_to "+ Add Book", new_book_path,
+          class: "new-item-link",
+          data: { turbo_frame: "modal-content" } %>
     <% end %>
   </div>
 
-  <div data-controller="search" data-search-url-value="<%= books_path %>">
-    <div class="search-and-form">
-      <input
-        type="text"
-        placeholder="Search books..."
-        class="search-input"
-        data-search-target="input"
-        data-action="input->search#search"
-        value="<%= params[:query] %>">
-    </div>
+  <hr>
 
-    <hr>
-
-    <div data-search-target="results">
-      <%= render "books_list" %>
-    </div>
-  </div>
+  <%= render "books_list" %>
 </div>

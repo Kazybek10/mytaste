@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   resources :books
   resources :recipes
 
+  get '/search', to: 'search#index'
+
   root "home#index"
 end
