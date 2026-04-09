@@ -8,6 +8,5 @@ Rails.application.routes.draw do
   resources :recipes
 
   get '/search', to: 'search#index'
-
   root "home#index"
 end

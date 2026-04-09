@@ -103,8 +103,81 @@ h1 {
 }
 
 .footer-links a:hover {
-  color: #ffd700;
+  color: #ffffff;
 }
+
+/* === CONTACT MODAL === */
+.contact-modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-modal-backdrop.active {
+  display: flex;
+}
+
+.contact-modal-box {
+  background: #1c1c1c;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 2rem 2.5rem;
+  min-width: 280px;
+  position: relative;
+  text-align: center;
+}
+
+.contact-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.contact-modal-close:hover {
+  color: #ffffff;
+}
+
+.contact-modal-title {
+  color: #ffffff;
+  font-size: 1.2rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.contact-modal-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.contact-link:hover {
+  color: #ffffff;
+  border-color: #555;
+}
+
 
 /* === BUTTONS === */
 .btn-primary {
