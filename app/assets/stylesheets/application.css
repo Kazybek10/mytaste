@@ -9,6 +9,7 @@
 /* === BASE === */
 *, *::before, *::after {
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 html, body {
@@ -202,38 +203,34 @@ h1 {
 
 .btn-outline {
   background: transparent;
-  color: #a0a0a0;
-  border: 1px solid #3a3a3a;
-  padding: 0.45rem 1.1rem;
-  border-radius: 6px;
+  border: none;
+  padding: 0;
+  color: #777;
   font-size: 0.9rem;
-  font-weight: 500;
   cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+  transition: color 0.2s ease;
   display: inline-block;
 }
 
 .btn-outline:hover {
-  border-color: #ffd700;
-  color: #ffd700;
+  color: #ffffff;
 }
 
 .btn-danger {
   background: transparent;
-  color: #e05555;
-  border: 1px solid #5a2020;
-  padding: 0.45rem 1.1rem;
-  border-radius: 6px;
+  border: none;
+  padding: 0;
+  color: #777;
   font-size: 0.9rem;
-  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+  transition: color 0.2s ease;
   display: inline-block;
 }
 
 .btn-danger:hover {
-  background-color: #5a2020;
-  color: #ff8080;
+  color: #e05555;
 }
 
 /* === MODAL === */
@@ -299,88 +296,130 @@ h1 {
 }
 
 /* === SHOW PAGE (shared across movies, books, recipes) === */
-.show-card {
-  background-color: #1c1c1c;
-  border: 1px solid #2a2a2a;
-  border-radius: 12px;
+.show-hero {
+  position: relative;
+  min-height: 480px;
   overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  max-width: 860px;
+  margin-top: -70px;
+  padding-top: 70px;
 }
 
-.show-cover-container {
+.show-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  filter: blur(28px) brightness(0.3);
+  transform: scale(1.08);
+  z-index: 0;
+}
+
+.show-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(15,15,15,0.4) 0%, rgba(15,15,15,0.85) 100%);
+  z-index: 1;
+}
+
+.show-hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 3rem 2rem 3.5rem;
+}
+
+.show-cover-wrap {
   flex-shrink: 0;
   width: 220px;
 }
 
-.show-cover {
-  width: 100%;
-  height: 330px;
-  object-fit: cover;
-  display: block;
-}
-
-.show-cover-placeholder {
+.show-cover-img {
   width: 220px;
   height: 330px;
-  background-color: #252525;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+
+.show-cover-blank {
+  width: 220px;
+  height: 330px;
+  border-radius: 8px;
+  background: #1c1c1c;
+  border: 1px solid #2a2a2a;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #555;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
 }
 
-.show-info {
-  padding: 2rem;
+.show-details {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
   min-width: 0;
+  padding-top: 0.5rem;
 }
 
-.show-info h1 {
+.show-title {
   color: #ffffff;
-  font-size: 1.6rem;
+  font-size: 2rem;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.show-author {
+  color: #aaaaaa;
+  font-size: 1rem;
   margin: 0;
 }
 
-.show-meta {
+.show-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.show-tag {
+  border: 1px solid #3a3a3a;
+  color: #999;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+
+.show-rating {
+  margin: 0;
+}
+
+.show-description {
+  color: #b0b0b0;
+  line-height: 1.7;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.show-section {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
 }
 
-.show-meta p {
-  margin: 0;
-  color: #b0b0b0;
-  font-size: 0.9rem;
-}
-
-.meta-label {
-  color: #666;
-  font-weight: 600;
-  font-size: 0.8rem;
+.show-section-label {
+  color: #555;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.show-description {
-  flex: 1;
-}
-
-.show-description .meta-label {
-  display: block;
-  margin-bottom: 0.35rem;
-}
-
-.show-description p {
-  color: #b0b0b0;
-  line-height: 1.65;
-  font-size: 0.9rem;
+  letter-spacing: 0.8px;
   margin: 0;
+  font-weight: 600;
 }
 
 .show-actions {
@@ -388,7 +427,7 @@ h1 {
   gap: 0.75rem;
   align-items: center;
   flex-wrap: wrap;
-  padding-top: 1rem;
+  padding-top: 1.25rem;
   border-top: 1px solid #2a2a2a;
-  margin-top: auto;
+  margin-top: 0.5rem;
 }

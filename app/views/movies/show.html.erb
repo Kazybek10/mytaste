@@ -1,39 +1,52 @@
-<div class="page-wrapper">
-  <div class="show-card">
-    <div class="show-cover-container">
+<div class="show-hero">
+  <% if @movie.cover_image.attached? && @movie.cover_image.image? %>
+    <div class="show-hero-bg" style="background-image: url('<%= url_for(@movie.cover_image) %>')"></div>
+  <% end %>
+  <div class="show-hero-overlay"></div>
+
+  <div class="show-hero-content">
+    <div class="show-cover-wrap">
       <% if @movie.cover_image.attached? && @movie.cover_image.image? %>
         <% begin %>
-          <%= image_tag url_for(@movie.cover_image.variant(resize_to_limit: [400, 600])), class: "show-cover" %>
+          <%= image_tag url_for(@movie.cover_image.variant(resize_to_limit: [320, 480])), class: "show-cover-img" %>
         <% rescue StandardError %>
-          <div class="show-cover-placeholder"><span>No Image</span></div>
+          <div class="show-cover-blank"><span>No Image</span></div>
         <% end %>
       <% else %>
-        <div class="show-cover-placeholder"><span>No Image</span></div>
+        <div class="show-cover-blank"><span>No Image</span></div>
       <% end %>
     </div>
 
-    <div class="show-info">
-      <h1><%= @movie.title %></h1>
+    <div class="show-details">
+      <h1 class="show-title"><%= @movie.title %></h1>
 
-      <div class="show-meta">
-        <p><span class="meta-label">Released:</span> <%= @movie.release_year %></p>
-        <% if @movie.director.present? %>
-          <p><span class="meta-label">Director:</span> <%= @movie.director %></p>
-        <% end %>
+      <% if @movie.director.present? %>
+        <p class="show-author"><%= @movie.director %></p>
+      <% end %>
+
+      <div class="show-tags">
         <% if @movie.genre.present? %>
-          <p><span class="meta-label">Genre:</span> <%= @movie.genre %></p>
+          <span class="show-tag"><%= @movie.genre %></span>
+        <% end %>
+        <% if @movie.release_year.present? %>
+          <span class="show-tag"><%= @movie.release_year %></span>
         <% end %>
       </div>
 
-      <% if @movie.description.present? %>
-        <div class="show-description">
-          <span class="meta-label">Description</span>
-          <p><%= @movie.description %></p>
+      <% if user_signed_in? %>
+        <div class="show-rating" data-star-rating
+             data-initial-rating="<%= @movie.rating || 0 %>"
+             data-resource-type="movies"
+             data-resource-id="<%= @movie.id %>">
         </div>
       <% end %>
 
+      <% if @movie.description.present? %>
+        <p class="show-description"><%= @movie.description %></p>
+      <% end %>
+
       <div class="show-actions">
-        <%= link_to "← Back to Movies", movies_path, class: "btn-outline" %>
+        <%= link_to "← Back", movies_path, class: "btn-outline" %>
         <% if user_signed_in? && current_user == @movie.user %>
           <%= link_to "Edit", edit_movie_path(@movie), class: "btn-outline", data: { turbo_frame: "modal-content" } %>
           <%= link_to "Delete", @movie, class: "btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>

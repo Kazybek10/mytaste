@@ -1,41 +1,52 @@
-<div class="page-wrapper">
-  <div class="show-card">
-    <div class="show-cover-container">
+<div class="show-hero">
+  <% if @book.cover_image.attached? && @book.cover_image.image? %>
+    <div class="show-hero-bg" style="background-image: url('<%= url_for(@book.cover_image) %>')"></div>
+  <% end %>
+  <div class="show-hero-overlay"></div>
+
+  <div class="show-hero-content">
+    <div class="show-cover-wrap">
       <% if @book.cover_image.attached? && @book.cover_image.image? %>
         <% begin %>
-          <%= image_tag url_for(@book.cover_image.variant(resize_to_limit: [400, 600])), class: "show-cover" %>
+          <%= image_tag url_for(@book.cover_image.variant(resize_to_limit: [320, 480])), class: "show-cover-img" %>
         <% rescue StandardError %>
-          <div class="show-cover-placeholder"><span>No Image</span></div>
+          <div class="show-cover-blank"><span>No Image</span></div>
         <% end %>
       <% else %>
-        <div class="show-cover-placeholder"><span>No Image</span></div>
+        <div class="show-cover-blank"><span>No Image</span></div>
       <% end %>
     </div>
 
-    <div class="show-info">
-      <h1><%= @book.title %></h1>
+    <div class="show-details">
+      <h1 class="show-title"><%= @book.title %></h1>
 
-      <div class="show-meta">
-        <% if @book.author.present? %>
-          <p><span class="meta-label">Author:</span> <%= @book.author %></p>
-        <% end %>
+      <% if @book.author.present? %>
+        <p class="show-author"><%= @book.author %></p>
+      <% end %>
+
+      <div class="show-tags">
         <% if @book.genre.present? %>
-          <p><span class="meta-label">Genre:</span> <%= @book.genre %></p>
+          <span class="show-tag"><%= @book.genre %></span>
         <% end %>
         <% if @book.publish_year.present? %>
-          <p><span class="meta-label">Published:</span> <%= @book.publish_year %></p>
+          <span class="show-tag"><%= @book.publish_year %></span>
         <% end %>
       </div>
 
-      <% if @book.description.present? %>
-        <div class="show-description">
-          <span class="meta-label">Description</span>
-          <p><%= @book.description %></p>
+      <% if user_signed_in? %>
+        <div class="show-rating" data-star-rating
+             data-initial-rating="<%= @book.rating || 0 %>"
+             data-resource-type="books"
+             data-resource-id="<%= @book.id %>">
         </div>
       <% end %>
 
+      <% if @book.description.present? %>
+        <p class="show-description"><%= @book.description %></p>
+      <% end %>
+
       <div class="show-actions">
-        <%= link_to "← Back to Books", books_path, class: "btn-outline" %>
+        <%= link_to "← Back", books_path, class: "btn-outline" %>
         <% if user_signed_in? && current_user == @book.user %>
           <%= link_to "Edit", edit_book_path(@book), class: "btn-outline", data: { turbo_frame: "modal-content" } %>
           <%= link_to "Delete", @book, class: "btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
