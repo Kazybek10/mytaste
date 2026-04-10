@@ -1,17 +1,16 @@
 <div class="show-hero">
-  <% if @book.cover_image.attached? && @book.cover_image.image? %>
-    <div class="show-hero-bg" style="background-image: url('<%= url_for(@book.cover_image) %>')"></div>
+  <% cover = @book.cover_image.attached? ? url_for(@book.cover_image) : @book.cover_url %>
+  <% if cover %>
+    <div class="show-hero-bg" style="background-image: url('<%= cover %>')"></div>
   <% end %>
   <div class="show-hero-overlay"></div>
 
   <div class="show-hero-content">
     <div class="show-cover-wrap">
       <% if @book.cover_image.attached? && @book.cover_image.image? %>
-        <% begin %>
-          <%= image_tag url_for(@book.cover_image.variant(resize_to_limit: [320, 480])), class: "show-cover-img" %>
-        <% rescue StandardError %>
-          <div class="show-cover-blank"><span>No Image</span></div>
-        <% end %>
+        <%= image_tag url_for(@book.cover_image.variant(resize_to_limit: [320, 480])), class: "show-cover-img" %>
+      <% elsif @book.cover_url? %>
+        <%= image_tag @book.cover_url, class: "show-cover-img" %>
       <% else %>
         <div class="show-cover-blank"><span>No Image</span></div>
       <% end %>
@@ -33,24 +32,45 @@
         <% end %>
       </div>
 
-      <% if user_signed_in? %>
-        <div class="show-rating" data-star-rating
-             data-initial-rating="<%= @book.rating || 0 %>"
-             data-resource-type="books"
-             data-resource-id="<%= @book.id %>">
-        </div>
-      <% end %>
-
       <% if @book.description.present? %>
         <p class="show-description"><%= @book.description %></p>
       <% end %>
 
+      <% if user_signed_in? %>
+        <div class="user-item-actions">
+          <% if @user_item %>
+            <div class="status-badges">
+              <%= button_to "Want to read", update_status_book_path(@book),
+                  method: :patch, params: { status: "want" },
+                  class: "status-btn #{"active" if @user_item.status == "want"}" %>
+              <%= button_to "Reading", update_status_book_path(@book),
+                  method: :patch, params: { status: "watching" },
+                  class: "status-btn #{"active" if @user_item.status == "watching"}" %>
+              <%= button_to "Completed", update_status_book_path(@book),
+                  method: :patch, params: { status: "completed" },
+                  class: "status-btn #{"active" if @user_item.status == "completed"}" %>
+            </div>
+
+            <div class="rating-row">
+              <% (1..5).each do |star| %>
+                <%= button_to "★", update_status_book_path(@book),
+                    method: :patch,
+                    params: { status: @user_item.status, rating: star },
+                    class: "star-btn #{"filled" if @user_item.rating && star <= @user_item.rating}" %>
+              <% end %>
+            </div>
+
+            <%= button_to "Remove from list", remove_from_list_book_path(@book),
+                method: :delete, class: "btn-danger" %>
+          <% else %>
+            <%= button_to "＋ Add to my list", add_to_list_book_path(@book),
+                method: :post, params: { status: "want" }, class: "btn-add" %>
+          <% end %>
+        </div>
+      <% end %>
+
       <div class="show-actions">
         <%= link_to "← Back", books_path, class: "btn-outline" %>
-        <% if user_signed_in? && current_user == @book.user %>
-          <%= link_to "Edit", edit_book_path(@book), class: "btn-outline", data: { turbo_frame: "modal-content" } %>
-          <%= link_to "Delete", @book, class: "btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-        <% end %>
       </div>
     </div>
   </div>

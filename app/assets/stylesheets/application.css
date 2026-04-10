@@ -429,3 +429,83 @@ h1 {
   border-top: 1px solid #2a2a2a;
   margin-top: 0.5rem;
 }
+
+/* === USER ITEM ACTIONS (Letterboxd-style) === */
+.user-item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  border-top: 1px solid #2a2a2a;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.status-badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.status-btn {
+  background: transparent;
+  border: 1px solid #3a3a3a;
+  color: #777;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.status-btn:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.status-btn.active {
+  border-color: #ffffff;
+  color: #ffffff;
+  background: rgba(255,255,255,0.08);
+}
+
+.rating-row {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  color: #444;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.star-btn:hover,
+.star-btn.filled {
+  color: #ffd700;
+}
+
+.btn-add {
+  background: transparent;
+  border: 1px solid #3a3a3a;
+  color: #aaa;
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-self: flex-start;
+}
+
+.btn-add:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.api-index-search {
+  margin-bottom: 1.5rem;
+}

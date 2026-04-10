@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_31_135347) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_10_112511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,9 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_31_135347) do
     t.bigint "user_id", null: false
     t.string "genre"
     t.integer "rating"
+    t.string "ol_key"
+    t.string "cover_url"
+    t.index ["ol_key"], name: "index_books_on_ol_key", unique: true
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
@@ -65,6 +68,9 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_31_135347) do
     t.bigint "user_id", null: false
     t.string "genre"
     t.integer "rating"
+    t.string "tmdb_id"
+    t.string "poster_url"
+    t.index ["tmdb_id"], name: "index_movies_on_tmdb_id", unique: true
     t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
@@ -76,7 +82,24 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_31_135347) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.integer "rating"
+    t.string "meal_id"
+    t.string "cover_url"
+    t.index ["meal_id"], name: "index_recipes_on_meal_id", unique: true
     t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
+  create_table "user_items", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "itemable_type", null: false
+    t.bigint "itemable_id", null: false
+    t.string "status", default: "want"
+    t.integer "rating"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["itemable_type", "itemable_id"], name: "index_user_items_on_itemable_type_and_itemable_id"
+    t.index ["user_id", "itemable_type", "itemable_id"], name: "index_user_items_on_user_id_and_itemable_type_and_itemable_id", unique: true
+    t.index ["user_id"], name: "index_user_items_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -96,4 +119,5 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_31_135347) do
   add_foreign_key "books", "users"
   add_foreign_key "movies", "users"
   add_foreign_key "recipes", "users"
+  add_foreign_key "user_items", "users"
 end

@@ -3,24 +3,39 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :movies do
+  resources :movies, only: [:index, :show] do
     collection do
-      get :api_search
-      get :api_import
+      get  :api_search
+      get  :api_import
+    end
+    member do
+      post   :add_to_list
+      delete :remove_from_list
+      patch  :update_status
     end
   end
 
-  resources :books do
+  resources :books, only: [:index, :show] do
     collection do
-      get :api_search
-      get :api_import
+      get  :api_search
+      get  :api_import
+    end
+    member do
+      post   :add_to_list
+      delete :remove_from_list
+      patch  :update_status
     end
   end
 
-  resources :recipes do
+  resources :recipes, only: [:index, :show] do
     collection do
-      get :api_search
-      get :api_import
+      get  :api_search
+      get  :api_import
+    end
+    member do
+      post   :add_to_list
+      delete :remove_from_list
+      patch  :update_status
     end
   end
 

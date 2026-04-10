@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :books, dependent: :nullify
   has_many :movies, dependent: :nullify
   has_many :recipes, dependent: :nullify
+  has_many :user_items, dependent: :destroy
 end

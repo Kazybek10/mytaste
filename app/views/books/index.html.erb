@@ -1,14 +1,27 @@
 <div class="page-wrapper">
   <div class="top-actions">
     <h1>Books</h1>
-    <% if user_signed_in? %>
-      <%= link_to "+ Add Book", new_book_path,
-          class: "new-item-link",
-          data: { turbo_frame: "modal-content" } %>
-    <% end %>
   </div>
-
   <hr>
+
+  <% if user_signed_in? %>
+    <div class="api-search-wrap"
+         data-controller="api-search"
+         data-api-search-search-url-value="<%= api_search_books_path %>"
+         data-api-search-import-url-value="<%= api_import_books_path %>"
+         data-api-search-id-param-value="ol_key">
+      <div class="api-search-field">
+        <input type="text"
+               class="form-control api-index-search"
+               placeholder="Search a book to add..."
+               data-api-search-target="input"
+               data-action="input->api-search#search blur->api-search#closeResults"
+               autocomplete="off" />
+        <span class="api-spinner" data-api-search-target="spinner">⟳</span>
+      </div>
+      <div class="api-results" data-api-search-target="results"></div>
+    </div>
+  <% end %>
 
   <%= render "books_list" %>
 </div>
