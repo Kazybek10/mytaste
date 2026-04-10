@@ -1,0 +1,57 @@
+<div class="page-wrapper profile-page">
+  <h1 class="profile-title"><%= current_user.email.split("@").first %></h1>
+
+  <div class="profile-totals">
+    <div class="profile-total-card">
+      <span class="total-number"><%= @stats[:movies].values.sum %></span>
+      <span class="total-label">Movies</span>
+    </div>
+    <div class="profile-total-card">
+      <span class="total-number"><%= @stats[:books].values.sum %></span>
+      <span class="total-label">Books</span>
+    </div>
+    <div class="profile-total-card">
+      <span class="total-number"><%= @stats[:recipes].values.sum %></span>
+      <span class="total-label">Recipes</span>
+    </div>
+  </div>
+
+  <div class="charts-grid"
+       data-controller="charts"
+       data-charts-stats-value="<%= @stats.to_json %>">
+    <div class="chart-card">
+      <p class="chart-title">Movies</p>
+      <canvas id="movies-chart"></canvas>
+    </div>
+    <div class="chart-card">
+      <p class="chart-title">Books</p>
+      <canvas id="books-chart"></canvas>
+    </div>
+    <div class="chart-card">
+      <p class="chart-title">Recipes</p>
+      <canvas id="recipes-chart"></canvas>
+    </div>
+  </div>
+
+  <% if @recent_items.any? %>
+    <div class="profile-recent">
+      <h2 class="profile-section-title">Recently added</h2>
+      <div class="recent-grid">
+        <% @recent_items.each do |user_item| %>
+          <% item = user_item.itemable %>
+          <% next unless item %>
+          <% cover = item.try(:poster_url) || item.try(:cover_url) %>
+          <%= link_to polymorphic_path(item), class: "recent-card" do %>
+            <% if cover %>
+              <img src="<%= cover %>" class="recent-cover" />
+            <% else %>
+              <div class="recent-cover-blank"></div>
+            <% end %>
+            <p class="recent-title"><%= item.title %></p>
+            <span class="recent-status <%= user_item.status %>"><%= user_item.status %></span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

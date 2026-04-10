@@ -10,3 +10,5 @@ pin "react" # @19.2.4
 pin "react-dom" # @19.2.4
 pin "react-dom/client", to: "react-dom-client.js"
 pin_all_from "app/javascript/components", under: "components"
+pin "chart.js" # @4.5.1
+pin "@kurkle/color", to: "@kurkle--color.js" # @0.3.4
