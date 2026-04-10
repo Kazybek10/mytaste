@@ -9,29 +9,54 @@
   </div>
 <% end %>
 
+<div class="api-search-wrap"
+     data-controller="api-search"
+     data-api-search-search-url-value="<%= api_search_movies_path %>"
+     data-api-search-import-url-value="<%= api_import_movies_path %>"
+     data-api-search-id-param-value="tmdb_id">
+
+  <div class="api-search-field">
+    <input type="text"
+           class="form-control"
+           placeholder="Search movie on TMDB..."
+           data-api-search-target="input"
+           data-action="input->api-search#search blur->api-search#closeResults"
+           autocomplete="off" />
+    <span class="api-spinner" data-api-search-target="spinner">⟳</span>
+  </div>
+
+  <div class="api-results" data-api-search-target="results"></div>
+</div>
+
 <%= form_with(model: movie, local: true, html: { multipart: true }, class: "movie-form") do |form| %>
   <div class="form-group">
     <%= form.label :title %>
-    <%= form.text_field :title, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :description %>
-    <%= form.text_area :description, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :release_year %>
-    <%= form.number_field :release_year, class: "form-control" %>
+    <%= form.text_field :title, class: "form-control", data: { "api-search-target": "fieldTitle" } %>
   </div>
 
   <div class="form-group">
     <%= form.label :director %>
-    <%= form.text_field :director, class: "form-control" %>
+    <%= form.text_field :director, class: "form-control", data: { "api-search-target": "fieldDirector" } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :release_year %>
+    <%= form.number_field :release_year, class: "form-control", data: { "api-search-target": "fieldYear" } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :genre %>
+    <%= form.text_field :genre, class: "form-control", data: { "api-search-target": "fieldGenre" } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: "form-control", rows: 4, data: { "api-search-target": "fieldDescription" } %>
   </div>
 
   <div class="form-group">
     <%= form.label :cover_image, "Cover Image" %>
+    <img data-api-search-target="posterPreview" style="display:none; width:80px; border-radius:4px; margin-bottom:0.5rem;" />
     <%= form.file_field :cover_image, class: "form-control" %>
   </div>
 

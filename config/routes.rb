@@ -3,9 +3,26 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :movies
-  resources :books
-  resources :recipes
+  resources :movies do
+    collection do
+      get :api_search
+      get :api_import
+    end
+  end
+
+  resources :books do
+    collection do
+      get :api_search
+      get :api_import
+    end
+  end
+
+  resources :recipes do
+    collection do
+      get :api_search
+      get :api_import
+    end
+  end
 
   get '/search', to: 'search#index'
   root "home#index"

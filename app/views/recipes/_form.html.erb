@@ -9,24 +9,44 @@
   </div>
 <% end %>
 
+<div class="api-search-wrap"
+     data-controller="api-search"
+     data-api-search-search-url-value="<%= api_search_recipes_path %>"
+     data-api-search-import-url-value="<%= api_import_recipes_path %>"
+     data-api-search-id-param-value="meal_id">
+
+  <div class="api-search-field">
+    <input type="text"
+           class="form-control"
+           placeholder="Search recipe on TheMealDB..."
+           data-api-search-target="input"
+           data-action="input->api-search#search blur->api-search#closeResults"
+           autocomplete="off" />
+    <span class="api-spinner" data-api-search-target="spinner">⟳</span>
+  </div>
+
+  <div class="api-results" data-api-search-target="results"></div>
+</div>
+
 <%= form_with(model: recipe, local: true, html: { multipart: true }, class: "recipe-form") do |form| %>
   <div class="form-group">
     <%= form.label :title %>
-    <%= form.text_field :title, class: "form-control" %>
+    <%= form.text_field :title, class: "form-control", data: { "api-search-target": "fieldTitle" } %>
   </div>
 
   <div class="form-group">
     <%= form.label :ingredients %>
-    <%= form.text_area :ingredients, class: "form-control" %>
+    <%= form.text_area :ingredients, class: "form-control", rows: 4, data: { "api-search-target": "fieldIngredients" } %>
   </div>
 
   <div class="form-group">
     <%= form.label :instructions %>
-    <%= form.text_area :instructions, class: "form-control" %>
+    <%= form.text_area :instructions, class: "form-control", rows: 6, data: { "api-search-target": "fieldInstructions" } %>
   </div>
 
   <div class="form-group">
     <%= form.label :cover_image, "Cover Image" %>
+    <img data-api-search-target="posterPreview" style="display:none; width:80px; border-radius:4px; margin-bottom:0.5rem;" />
     <%= form.file_field :cover_image, class: "form-control" %>
   </div>
 
