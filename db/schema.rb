@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_04_10_112511) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_10_114919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,7 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_10_112511) do
     t.integer "publish_year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.string "genre"
     t.integer "rating"
     t.string "ol_key"
@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_10_112511) do
     t.string "director"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.string "genre"
     t.integer "rating"
     t.string "tmdb_id"
@@ -80,7 +80,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_10_112511) do
     t.text "instructions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.integer "rating"
     t.string "meal_id"
     t.string "cover_url"
