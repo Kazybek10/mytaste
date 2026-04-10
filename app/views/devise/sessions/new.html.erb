@@ -2,7 +2,7 @@
   <div class="movie-form" style="margin: 0 auto;">
     <h1>Log in</h1>
 
-    <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), html: { method: :post }) do |f| %>
+    <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), html: { method: :post }, data: { turbo: false }) do |f| %>
       <div class="form-group">
         <%= f.label :email %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
