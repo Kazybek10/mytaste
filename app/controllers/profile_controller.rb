@@ -2,9 +2,8 @@ class ProfileController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    items = current_user.user_items
+    items = current_user.user_items.includes(:itemable)
 
-    # Статистика по статусам для каждой категории
     @stats = {
       movies: {
         completed: items.where(itemable_type: "Movie", status: "completed").count,
@@ -23,7 +22,10 @@ class ProfileController < ApplicationController
       }
     }
 
-    # Последние добавленные
-    @recent_items = items.includes(:itemable).order(created_at: :desc).limit(6)
+    @lists = {
+      want:      items.where(status: "want").order(created_at: :desc),
+      watching:  items.where(status: "watching").order(created_at: :desc),
+      completed: items.where(status: "completed").order(created_at: :desc)
+    }
   end
 end

@@ -28,7 +28,7 @@
   <div class="api-results" data-api-search-target="results"></div>
 </div>
 
-<%= form_with(model: book, local: true, html: { multipart: true }, class: "book-form") do |form| %>
+<%= form_with(model: book, local: true, html: { multipart: true }, class: "book-form", data: { turbo_frame: "_top" }) do |form| %>
   <div class="form-group">
     <%= form.label :title %>
     <%= form.text_field :title, class: "form-control", data: { "api-search-target": "fieldTitle" } %>

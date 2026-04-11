@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
-  before_action :authenticate_user!, only: [:add_to_list, :remove_from_list, :update_status]
-  before_action :set_movie, only: [:show, :add_to_list, :remove_from_list, :update_status]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :add_to_list, :remove_from_list, :update_status]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy, :add_to_list, :remove_from_list, :update_status]
 
   def index
     @movies = Movie.recent
@@ -10,6 +10,35 @@ class MoviesController < ApplicationController
 
   def show
     @user_item = current_user.user_items.find_by(itemable: @movie) if user_signed_in?
+  end
+
+  def new
+    @movie = Movie.new
+  end
+
+  def create
+    @movie = Movie.new(movie_params)
+    if @movie.save
+      redirect_to @movie, notice: "Movie added."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @movie.update(movie_params)
+      redirect_to @movie, notice: "Movie updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @movie.destroy
+    redirect_to movies_path, notice: "Movie deleted."
   end
 
   # GET /movies/search?query=inception — поиск по TMDB
@@ -35,8 +64,10 @@ class MoviesController < ApplicationController
   # PATCH /movies/:id/status — обновить статус или рейтинг
   def update_status
     user_item = current_user.user_items.find_or_initialize_by(itemable: @movie)
-    user_item.update(status: params[:status], rating: params[:rating])
-    redirect_to @movie
+    attrs = { status: params[:status] }
+    attrs[:rating] = params[:rating] if params[:rating].present?
+    user_item.update(attrs)
+    redirect_to @movie, status: :see_other
   end
 
   # GET /movies/api_search?query=... — поиск по TMDB (JSON)
@@ -57,5 +88,9 @@ class MoviesController < ApplicationController
 
   def set_movie
     @movie = Movie.find(params[:id])
+  end
+
+  def movie_params
+    params.require(:movie).permit(:title, :director, :release_year, :genre, :description, :cover_image)
   end
 end

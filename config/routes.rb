@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :movies, only: [:index, :show] do
+  resources :movies do
     collection do
       get  :api_search
       get  :api_import
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :books, only: [:index, :show] do
+  resources :books do
     collection do
       get  :api_search
       get  :api_import
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :recipes, only: [:index, :show] do
+  resources :recipes do
     collection do
       get  :api_search
       get  :api_import
