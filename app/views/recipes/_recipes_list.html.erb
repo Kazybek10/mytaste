@@ -8,8 +8,14 @@
               <% begin %>
                 <%= image_tag url_for(recipe.cover_image.variant(resize_to_limit: [240, 360])), class: "recipe-cover" %>
               <% rescue StandardError %>
-                <div class="recipe-cover-placeholder"><span class="placeholder-text">No Image</span></div>
+                <% if recipe.cover_url? %>
+                  <%= image_tag recipe.cover_url, class: "recipe-cover" %>
+                <% else %>
+                  <div class="recipe-cover-placeholder"><span class="placeholder-text">No Image</span></div>
+                <% end %>
               <% end %>
+            <% elsif recipe.cover_url? %>
+              <%= image_tag recipe.cover_url, class: "recipe-cover" %>
             <% else %>
               <div class="recipe-cover-placeholder"><span class="placeholder-text">No Image</span></div>
             <% end %>

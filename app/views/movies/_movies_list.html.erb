@@ -8,8 +8,14 @@
               <% begin %>
                 <%= image_tag url_for(movie.cover_image.variant(resize_to_limit: [240, 360])), class: "movie-cover" %>
               <% rescue StandardError %>
-                <div class="movie-cover-placeholder"><span class="placeholder-text">No Image</span></div>
+                <% if movie.poster_url? %>
+                  <%= image_tag movie.poster_url, class: "movie-cover" %>
+                <% else %>
+                  <div class="movie-cover-placeholder"><span class="placeholder-text">No Image</span></div>
+                <% end %>
               <% end %>
+            <% elsif movie.poster_url? %>
+              <%= image_tag movie.poster_url, class: "movie-cover" %>
             <% else %>
               <div class="movie-cover-placeholder"><span class="placeholder-text">No Image</span></div>
             <% end %>
