@@ -509,3 +509,84 @@ h1 {
 .api-index-search {
   margin-bottom: 1.5rem;
 }
+
+/* ============================================
+   MOBILE RESPONSIVE (max-width: 768px)
+   ============================================ */
+@media (max-width: 768px) {
+  /* Navbar */
+  .navbar-container {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-search {
+    order: 3;
+    flex: 1 1 100%;
+    margin: 0;
+  }
+
+  .navbar-buttons {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .navbar-item {
+    font-size: 0.85rem;
+  }
+
+  /* Page wrapper */
+  .page-wrapper {
+    padding: 1rem;
+  }
+
+  /* Top actions (h1 + button) */
+  .top-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  /* Show hero */
+  .show-hero-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem 2.5rem;
+  }
+
+  .show-cover-wrap {
+    width: 160px;
+  }
+
+  .show-cover-img,
+  .show-cover-blank {
+    width: 160px;
+    height: 240px;
+  }
+
+  .show-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .show-author {
+    text-align: center;
+  }
+
+  .show-tags {
+    justify-content: center;
+  }
+
+  .show-actions {
+    flex-wrap: wrap;
+  }
+
+  /* Footer */
+  .footer-container {
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: center;
+  }
+}

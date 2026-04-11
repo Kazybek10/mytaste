@@ -168,3 +168,25 @@
 .recent-status.completed { background: #1a2a1a; color: #6abf6a; }
 .recent-status.watching  { background: #1a1a2a; color: #6a6abf; }
 .recent-status.want      { background: #2a2a2a; color: #888; }
+
+@media (max-width: 768px) {
+  .profile-totals {
+    gap: 0.75rem;
+  }
+
+  .profile-total-card {
+    padding: 1rem;
+  }
+
+  .total-number {
+    font-size: 1.8rem;
+  }
+
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recent-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  }
+}
