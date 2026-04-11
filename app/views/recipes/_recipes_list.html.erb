@@ -26,13 +26,6 @@
           <% if recipe.ingredients.present? %>
             <p class="recipe-ingredients"><%= truncate(recipe.ingredients, length: 60, separator: ' ') %></p>
           <% end %>
-          <% if user_signed_in? %>
-            <div data-star-rating
-                 data-initial-rating="<%= recipe.rating || 0 %>"
-                 data-resource-type="recipes"
-                 data-resource-id="<%= recipe.id %>">
-            </div>
-          <% end %>
         </div>
       </div>
     <% end %>

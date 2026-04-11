@@ -56,7 +56,8 @@
                 <%= button_to "★", update_status_movie_path(@movie),
                     method: :patch,
                     params: { status: @user_item.status, rating: star },
-                    class: "star-btn #{"filled" if @user_item.rating && star <= @user_item.rating}" %>
+                    class: "star-btn #{"filled" if @user_item.rating && star <= @user_item.rating}",
+                    form: { data: { turbo: false } } %>
               <% end %>
             </div>
 
