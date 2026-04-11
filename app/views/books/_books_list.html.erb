@@ -8,8 +8,14 @@
               <% begin %>
                 <%= image_tag url_for(book.cover_image.variant(resize_to_limit: [240, 360])), class: "book-cover" %>
               <% rescue StandardError %>
-                <div class="book-cover-placeholder"><span class="placeholder-text">No Image</span></div>
+                <% if book.cover_url? %>
+                  <%= image_tag book.cover_url, class: "book-cover" %>
+                <% else %>
+                  <div class="book-cover-placeholder"><span class="placeholder-text">No Image</span></div>
+                <% end %>
               <% end %>
+            <% elsif book.cover_url? %>
+              <%= image_tag book.cover_url, class: "book-cover" %>
             <% else %>
               <div class="book-cover-placeholder"><span class="placeholder-text">No Image</span></div>
             <% end %>
