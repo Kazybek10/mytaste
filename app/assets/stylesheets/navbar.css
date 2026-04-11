@@ -186,3 +186,18 @@
 .navbar-item:hover {
   color: #ffffff;
 }
+
+@media (max-width: 768px) {
+  .navbar-brand {
+    width: 90px;
+    height: 32px;
+  }
+
+  .navbar-buttons {
+    gap: 0.75rem;
+  }
+
+  .navbar-search-input {
+    font-size: 0.8rem;
+  }
+}
