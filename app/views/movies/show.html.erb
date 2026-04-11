@@ -71,6 +71,12 @@
 
       <div class="show-actions">
         <%= link_to "← Back", movies_path, class: "btn-outline" %>
+        <% if user_signed_in? %>
+          <% if @movie.tmdb_id.nil? %>
+            <%= link_to "Edit", edit_movie_path(@movie), class: "btn-outline" %>
+          <% end %>
+          <%= button_to "Delete from site", @movie, method: :delete, class: "btn-danger", data: { turbo_confirm: "Remove this movie from the site?" } %>
+        <% end %>
       </div>
     </div>
   </div>

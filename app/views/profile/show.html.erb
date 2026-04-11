@@ -1,5 +1,14 @@
 <div class="page-wrapper profile-page">
-  <h1 class="profile-title"><%= current_user.email.split("@").first %></h1>
+
+  <div class="profile-header">
+    <div class="profile-avatar">
+      <%= current_user.email.split("@").first.upcase.first %>
+    </div>
+    <div class="profile-info">
+      <h1 class="profile-title"><%= current_user.email.split("@").first %></h1>
+      <p class="profile-email"><%= current_user.email %></p>
+    </div>
+  </div>
 
   <div class="profile-totals">
     <div class="profile-total-card">
@@ -33,17 +42,22 @@
     </div>
   </div>
 
-  <% if @recent_items.any? %>
-    <div class="profile-recent">
-      <h2 class="profile-section-title">Recently added</h2>
+  <% [["Want to watch", :want], ["In progress", :watching], ["Completed", :completed]].each do |label, status| %>
+    <% list = @lists[status] %>
+    <% next if list.empty? %>
+
+    <div class="profile-section">
+      <h2 class="profile-section-title"><%= label %> <span class="profile-section-count"><%= list.size %></span></h2>
       <div class="recent-grid">
-        <% @recent_items.each do |user_item| %>
+        <% list.each do |user_item| %>
           <% item = user_item.itemable %>
           <% next unless item %>
           <% cover = item.try(:poster_url) || item.try(:cover_url) %>
           <%= link_to polymorphic_path(item), class: "recent-card" do %>
             <% if cover %>
               <img src="<%= cover %>" class="recent-cover" />
+            <% elsif item.try(:cover_image)&.attached? %>
+              <%= image_tag url_for(item.cover_image), class: "recent-cover" %>
             <% else %>
               <div class="recent-cover-blank"></div>
             <% end %>
@@ -54,4 +68,5 @@
       </div>
     </div>
   <% end %>
+
 </div>

@@ -1,6 +1,9 @@
 <div class="page-wrapper">
   <div class="top-actions">
     <h1>Movies</h1>
+    <% if user_signed_in? %>
+      <%= link_to "+ Add manually", new_movie_path, class: "btn-outline" %>
+    <% end %>
   </div>
   <hr>
 

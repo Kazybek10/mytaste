@@ -71,6 +71,12 @@
 
       <div class="show-actions">
         <%= link_to "← Back", books_path, class: "btn-outline" %>
+        <% if user_signed_in? %>
+          <% if @book.ol_key.nil? %>
+            <%= link_to "Edit", edit_book_path(@book), class: "btn-outline" %>
+          <% end %>
+          <%= button_to "Delete from site", @book, method: :delete, class: "btn-danger", data: { turbo_confirm: "Remove this book from the site?" } %>
+        <% end %>
       </div>
     </div>
   </div>

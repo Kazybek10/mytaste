@@ -68,6 +68,12 @@
 
       <div class="show-actions">
         <%= link_to "← Back", recipes_path, class: "btn-outline" %>
+        <% if user_signed_in? %>
+          <% if @recipe.meal_id.nil? %>
+            <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn-outline" %>
+          <% end %>
+          <%= button_to "Delete from site", @recipe, method: :delete, class: "btn-danger", data: { turbo_confirm: "Remove this recipe from the site?" } %>
+        <% end %>
       </div>
     </div>
   </div>
