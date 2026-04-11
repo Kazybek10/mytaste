@@ -30,13 +30,6 @@
           <% if book.publish_year.present? %>
             <p class="book-year"><%= book.publish_year %></p>
           <% end %>
-          <% if user_signed_in? %>
-            <div data-star-rating
-                 data-initial-rating="<%= book.rating || 0 %>"
-                 data-resource-type="books"
-                 data-resource-id="<%= book.id %>">
-            </div>
-          <% end %>
         </div>
       </div>
     <% end %>

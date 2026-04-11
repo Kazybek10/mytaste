@@ -42,16 +42,30 @@
     </div>
   </div>
 
-  <% [["Want to watch", :want], ["In progress", :watching], ["Completed", :completed]].each do |label, status| %>
+  <%
+    status_labels = {
+      movies:  { want: "Want to watch", watching: "Watching",  completed: "Completed" },
+      books:   { want: "Want to read",  watching: "Reading",   completed: "Completed" },
+      recipes: { want: "Want to try",   watching: "Trying",    completed: "Made it"   }
+    }
+    type_map = { "Movie" => :movies, "Book" => :books, "Recipe" => :recipes }
+  %>
+
+  <% [:want, :watching, :completed].each do |status| %>
     <% list = @lists[status] %>
     <% next if list.empty? %>
 
     <div class="profile-section">
-      <h2 class="profile-section-title"><%= label %> <span class="profile-section-count"><%= list.size %></span></h2>
+      <h2 class="profile-section-title">
+        <%= status.to_s.capitalize %>
+        <span class="profile-section-count"><%= list.size %></span>
+      </h2>
       <div class="recent-grid">
         <% list.each do |user_item| %>
           <% item = user_item.itemable %>
           <% next unless item %>
+          <% category = type_map[item.class.name] %>
+          <% label = status_labels.dig(category, status) %>
           <% cover = item.try(:poster_url) || item.try(:cover_url) %>
           <%= link_to polymorphic_path(item), class: "recent-card" do %>
             <% if cover %>
@@ -62,7 +76,7 @@
               <div class="recent-cover-blank"></div>
             <% end %>
             <p class="recent-title"><%= item.title %></p>
-            <span class="recent-status <%= user_item.status %>"><%= user_item.status %></span>
+            <span class="recent-status <%= status %>"><%= label %></span>
           <% end %>
         <% end %>
       </div>

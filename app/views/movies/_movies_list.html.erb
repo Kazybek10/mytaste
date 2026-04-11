@@ -32,13 +32,6 @@
           <% if movie.genre.present? %>
             <p class="movie-genre"><%= movie.genre %></p>
           <% end %>
-          <% if user_signed_in? %>
-            <div data-star-rating
-                 data-initial-rating="<%= movie.rating || 0 %>"
-                 data-resource-type="movies"
-                 data-resource-id="<%= movie.id %>">
-            </div>
-          <% end %>
         </div>
       </div>
     <% end %>
