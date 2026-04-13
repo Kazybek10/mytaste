@@ -16,7 +16,6 @@ class Movie < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
 
-  # Найти или создать фильм из данных TMDB
   def self.find_or_create_from_tmdb(data)
     find_or_create_by(tmdb_id: data[:tmdb_id].to_s) do |m|
       m.title        = data[:title]

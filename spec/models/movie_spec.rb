@@ -1,18 +1,9 @@
-# Говорим RSpec: тестируем модель Movie
 require "rails_helper"
 
 RSpec.describe Movie, type: :model do
-
-  # describe — группирует тесты по теме
   describe "validations" do
-
-    # it — один конкретный тест. Название описывает что проверяем.
     it "is valid with all required fields" do
-      # build — создаёт объект в памяти (не сохраняет в БД)
-      # factory :movie уже заполнила все поля через Faker
       movie = build(:movie)
-
-      # expect(...).to be_valid — ожидаем что объект валидный
       expect(movie).to be_valid
     end
 
@@ -48,13 +39,9 @@ RSpec.describe Movie, type: :model do
   end
 
   describe "scopes" do
-
     it "recent returns movies ordered by newest first" do
-      # create — создаёт и сохраняет в тестовой БД
       old_movie = create(:movie, created_at: 1.week.ago)
       new_movie = create(:movie, created_at: Time.current)
-
-      # first — первый в списке должен быть новый
       expect(Movie.recent.first).to eq(new_movie)
     end
   end
