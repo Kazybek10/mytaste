@@ -51,7 +51,11 @@ rails server
 
 ## Screenshots
 
-<!-- Add screenshots here -->
+![Home](public/screenshots/screenshot-home.png)
+![Movies](public/screenshots/screenshot-movies.png)
+![Search](public/screenshots/screenshot-search.png)
+![Books](public/screenshots/screenshot-books.png)
+![Show page](public/screenshots/screenshot-show.png)
 
 ---
 
