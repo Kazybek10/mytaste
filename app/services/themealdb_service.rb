@@ -26,7 +26,6 @@ class ThemealdbService
 
     meal = response["meals"].first
 
-    # Собираем ингредиенты из 20 полей API
     ingredients = (1..20).filter_map do |i|
       ingredient = meal["strIngredient#{i}"]
       measure    = meal["strMeasure#{i}"]
