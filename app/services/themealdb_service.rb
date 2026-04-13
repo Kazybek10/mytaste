@@ -11,10 +11,10 @@ class ThemealdbService
 
     response["meals"].first(8).map do |meal|
       {
-        meal_id:      meal["idMeal"],
-        title:        meal["strMeal"],
-        category:     meal["strCategory"],
-        poster_url:   meal["strMealThumb"]
+        meal_id:    meal["idMeal"],
+        title:      meal["strMeal"],
+        category:   meal["strCategory"],
+        poster_url: meal["strMealThumb"]
       }
     end
   end
@@ -41,15 +41,17 @@ class ThemealdbService
     }
   end
 
-  private
+  class << self
+    private
 
-  def self.make_request(uri)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    response = http.get(uri.request_uri)
-    JSON.parse(response.body)
-  rescue => e
-    Rails.logger.error "TheMealDB API error: #{e.message}"
-    nil
+    def make_request(uri)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      response = http.get(uri.request_uri)
+      JSON.parse(response.body)
+    rescue StandardError => e
+      Rails.logger.error "TheMealDB API error: #{e.message}"
+      nil
+    end
   end
 end

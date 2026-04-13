@@ -2,6 +2,8 @@ class BaseController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :add_to_list, :remove_from_list, :update_status]
   before_action :set_resource, only: [:show, :edit, :update, :destroy, :add_to_list, :remove_from_list, :update_status]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   def show
     @user_item = current_user.user_items.find_by(itemable: resource) if user_signed_in?
   end
@@ -71,5 +73,9 @@ class BaseController < ApplicationController
 
   def set_resource
     set_ivar(resource_class.find(params[:id]))
+  end
+
+  def record_not_found
+    redirect_to polymorphic_path(resource_class), alert: "#{resource_class} not found."
   end
 end
