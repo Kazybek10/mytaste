@@ -199,37 +199,6 @@ h1 {
   color: #ffffff;
 }
 
-.btn-outline {
-  background: transparent;
-  border: none;
-  padding: 0;
-  color: #777;
-  font-size: 0.9rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  display: inline-block;
-}
-
-.btn-outline:hover {
-  color: #ffffff;
-}
-
-.btn-danger {
-  background: transparent;
-  border: none;
-  padding: 0;
-  color: #777;
-  font-size: 0.9rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  display: inline-block;
-}
-
-.btn-danger:hover {
-  color: #e05555;
-}
 
 /* === MODAL === */
 .modal-backdrop {

@@ -41,12 +41,6 @@ class MoviesController < ApplicationController
     redirect_to movies_path, notice: "Movie deleted."
   end
 
-  # GET /movies/search?query=inception — поиск по TMDB
-  def search
-    @results = TmdbService.search(params[:query])
-    render json: @results
-  end
-
   # POST /movies/:id/add — добавить фильм в список пользователя
   def add_to_list
     user_item = current_user.user_items.find_or_initialize_by(itemable: @movie)
