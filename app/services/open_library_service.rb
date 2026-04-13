@@ -36,15 +36,17 @@ class OpenLibraryService
     }
   end
 
-  private
+  class << self
+    private
 
-  def self.make_request(uri)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    response = http.get(uri.request_uri)
-    JSON.parse(response.body)
-  rescue => e
-    Rails.logger.error "OpenLibrary API error: #{e.message}"
-    nil
+    def make_request(uri)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      response = http.get(uri.request_uri)
+      JSON.parse(response.body)
+    rescue StandardError => e
+      Rails.logger.error "OpenLibrary API error: #{e.message}"
+      nil
+    end
   end
 end

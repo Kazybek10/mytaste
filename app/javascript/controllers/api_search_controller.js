@@ -73,10 +73,28 @@ export default class extends Controller {
     })
   }
 
-  // Переходим на страницу api_import — Rails создаст запись и сделает redirect на show
   importItem(id) {
-    const url = `${this.importUrlValue}?${this.idParamValue}=${encodeURIComponent(id)}`
-    window.location.href = url
+    const form = document.createElement("form")
+    form.method = "POST"
+    form.action = this.importUrlValue
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content
+    if (csrfToken) {
+      const csrfInput = document.createElement("input")
+      csrfInput.type = "hidden"
+      csrfInput.name = "authenticity_token"
+      csrfInput.value = csrfToken
+      form.appendChild(csrfInput)
+    }
+
+    const idInput = document.createElement("input")
+    idInput.type = "hidden"
+    idInput.name = this.idParamValue
+    idInput.value = id
+    form.appendChild(idInput)
+
+    document.body.appendChild(form)
+    form.submit()
   }
 
   closeResults() {

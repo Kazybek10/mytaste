@@ -42,18 +42,20 @@ class TmdbService
     }
   end
 
-  private
+  class << self
+    private
 
-  def self.make_request(uri)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    request = Net::HTTP::Get.new(uri)
-    request["Authorization"] = "Bearer #{ENV["TMDB_TOKEN"]}"
-    request["Content-Type"] = "application/json"
-    response = http.request(request)
-    JSON.parse(response.body)
-  rescue => e
-    Rails.logger.error "TMDB API error: #{e.message}"
-    nil
+    def make_request(uri)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      request = Net::HTTP::Get.new(uri)
+      request["Authorization"] = "Bearer #{ENV["TMDB_TOKEN"]}"
+      request["Content-Type"] = "application/json"
+      response = http.request(request)
+      JSON.parse(response.body)
+    rescue StandardError => e
+      Rails.logger.error "TMDB API error: #{e.message}"
+      nil
+    end
   end
 end

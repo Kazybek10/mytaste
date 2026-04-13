@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :movies do
     collection do
       get  :api_search
-      get  :api_import
+      post :api_import
     end
     member do
       post   :add_to_list
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :books do
     collection do
       get  :api_search
-      get  :api_import
+      post :api_import
     end
     member do
       post   :add_to_list
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :recipes do
     collection do
       get  :api_search
-      get  :api_import
+      post :api_import
     end
     member do
       post   :add_to_list
