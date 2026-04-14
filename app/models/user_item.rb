@@ -1,6 +1,7 @@
 class UserItem < ApplicationRecord
   belongs_to :user
   belongs_to :itemable, polymorphic: true
+  belongs_to :watch_list, optional: true
 
   STATUSES = %w[want watching completed].freeze
 
