@@ -1,12 +1,19 @@
 <div class="page-wrapper profile-page">
 
   <div class="profile-header">
-    <div class="profile-avatar">
-      <%= current_user.email.split("@").first.upcase.first %>
+    <div class="profile-avatar-wrap">
+      <% if current_user.avatar.attached? %>
+        <img src="<%= url_for(current_user.avatar) %>" class="profile-avatar-img" />
+      <% else %>
+        <div class="profile-avatar">
+          <%= current_user.display_name.upcase.first %>
+        </div>
+      <% end %>
     </div>
     <div class="profile-info">
-      <h1 class="profile-title"><%= current_user.email.split("@").first %></h1>
+      <h1 class="profile-title"><%= current_user.display_name %></h1>
       <p class="profile-email"><%= current_user.email %></p>
+      <%= link_to "Edit profile", edit_profile_path, class: "btn-outline profile-edit-btn" %>
     </div>
   </div>
 
@@ -42,6 +49,58 @@
     </div>
   </div>
 
+  <%# === WATCH LISTS === %>
+  <div class="profile-section">
+    <div class="profile-section-header">
+      <h2 class="profile-section-title">My Lists</h2>
+      <% if @watch_lists.size < 10 %>
+        <button class="btn-outline" data-action="click->modal#open" data-turbo-frame="modal-content"
+                onclick="document.getElementById('new-list-form').classList.toggle('hidden'); return false;">
+          + New list
+        </button>
+      <% end %>
+    </div>
+
+    <div id="new-list-form" class="hidden">
+      <%= form_with url: watch_lists_path, local: true, class: "inline-form" do |f| %>
+        <%= f.text_field :name, class: "form-control", placeholder: "List name...", required: true, data: { watch_list: { name: "" } }, name: "watch_list[name]" %>
+        <%= f.submit "Create", class: "btn-primary" %>
+      <% end %>
+    </div>
+
+    <% if @watch_lists.any? %>
+      <div class="watch-lists-grid">
+        <% @watch_lists.each do |wl| %>
+          <div class="watch-list-card" data-controller="inline-edit">
+            <div class="watch-list-header">
+              <span class="watch-list-name" data-inline-edit-target="display"><%= wl.name %></span>
+              <%= form_with model: wl, url: watch_list_path(wl), method: :patch, local: true,
+                  class: "hidden", data: { "inline-edit-target": "form" } do |f| %>
+                <%= f.text_field :name, class: "form-control form-control-sm", value: wl.name %>
+                <%= f.submit "Save", class: "btn-primary btn-sm" %>
+                <button type="button" class="btn-outline btn-sm" data-action="click->inline-edit#cancel">Cancel</button>
+              <% end %>
+              <div class="watch-list-actions" data-inline-edit-target="actions">
+                <button class="btn-outline btn-sm" data-action="click->inline-edit#edit">Rename</button>
+                <%= button_to "Delete", watch_list_path(wl), method: :delete, class: "btn-danger btn-sm",
+                    data: { turbo_confirm: "Delete this list?" } %>
+              </div>
+            </div>
+
+            <div class="watch-list-stats">
+              <span><%= wl.user_items.where(itemable_type: "Movie").count %> movies</span>
+              <span><%= wl.user_items.where(itemable_type: "Book").count %> books</span>
+              <span><%= wl.user_items.where(itemable_type: "Recipe").count %> recipes</span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="chart-empty">No lists yet. Create your first list!</p>
+    <% end %>
+  </div>
+
+  <%# === STATUS SECTIONS === %>
   <%
     status_labels = {
       movies:  { want: "Want to watch", watching: "Watching",  completed: "Completed" },

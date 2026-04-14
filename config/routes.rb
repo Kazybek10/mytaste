@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
-  get '/profile', to: 'profile#show', as: :profile
+  get  '/profile',      to: 'profile#show',   as: :profile
+  get  '/profile/edit', to: 'profile#edit',   as: :edit_profile
+  patch '/profile',     to: 'profile#update'
+  resources :watch_lists, only: [:create, :update, :destroy]
 
   devise_for :users
 
