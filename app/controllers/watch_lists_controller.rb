@@ -24,6 +24,13 @@ class WatchListsController < ApplicationController
     redirect_to profile_path, notice: "List deleted."
   end
 
+  def reorder
+    params[:ids].each_with_index do |id, index|
+      current_user.watch_lists.where(id: id).update_all(position: index)
+    end
+    head :ok
+  end
+
   private
 
   def set_watch_list

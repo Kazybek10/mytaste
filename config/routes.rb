@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   get  '/profile',      to: 'profile#show',   as: :profile
   get  '/profile/edit', to: 'profile#edit',   as: :edit_profile
   patch '/profile',     to: 'profile#update'
-  resources :watch_lists, only: [:create, :update, :destroy]
+  resources :watch_lists, only: [:create, :update, :destroy] do
+    collection do
+      patch :reorder
+    end
+  end
 
   devise_for :users
 
