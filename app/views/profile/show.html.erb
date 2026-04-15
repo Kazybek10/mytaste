@@ -69,9 +69,11 @@
     </div>
 
     <% if @watch_lists.any? %>
-      <div class="watch-lists-grid">
+      <div class="watch-lists-grid"
+           data-controller="sortable"
+           data-sortable-url-value="<%= reorder_watch_lists_path %>">
         <% @watch_lists.each do |wl| %>
-          <div class="watch-list-card" data-controller="inline-edit">
+          <div class="watch-list-card" data-controller="inline-edit" data-id="<%= wl.id %>">
             <div class="watch-list-header">
               <span class="watch-list-name" data-inline-edit-target="display"><%= wl.name %></span>
               <%= form_with model: wl, url: watch_list_path(wl), method: :patch, local: true,
