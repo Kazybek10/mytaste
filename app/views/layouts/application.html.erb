@@ -42,13 +42,7 @@
       </div>
     </nav>
 
-    <% flash.each do |type, msg| %>
-      <div class="container mt-4">
-        <div class="alert alert-<%= type == 'notice' ? 'success' : 'danger' %>" role="alert">
-          <%= msg %>
-        </div>
-      </div>
-    <% end %>
+    <div id="toast-container" data-controller="toast" data-toast-messages-value="<%= flash.to_json %>"></div>
 
     <div id="modal-backdrop" class="modal-backdrop" data-controller="modal" data-action="click->modal#backdropClick">
       <div class="modal-box" data-modal-target="box">
