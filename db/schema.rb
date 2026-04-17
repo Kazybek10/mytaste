@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_04_15_110130) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_17_113154) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -98,6 +98,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_15_110130) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "watch_list_id"
+    t.text "review"
     t.index ["itemable_type", "itemable_id"], name: "index_user_items_on_itemable_type_and_itemable_id"
     t.index ["user_id", "itemable_type", "itemable_id"], name: "index_user_items_on_user_id_and_itemable_type_and_itemable_id", unique: true
     t.index ["user_id"], name: "index_user_items_on_user_id"

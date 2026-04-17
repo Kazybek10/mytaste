@@ -53,6 +53,8 @@ class BaseController < ApplicationController
     user_item = current_user.user_items.find_or_initialize_by(itemable: resource)
     attrs = { status: params[:status] }
     attrs[:rating] = params[:rating] if params[:rating].present?
+    attrs[:notes]  = params[:notes]  if params.key?(:notes)
+    attrs[:review] = params[:review] if params.key?(:review)
     user_item.update(attrs)
     redirect_to resource, status: :see_other
   end
