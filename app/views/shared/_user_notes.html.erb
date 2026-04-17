@@ -1,0 +1,43 @@
+<div class="user-notes-section" data-controller="inline-edit">
+
+  <div data-inline-edit-target="display">
+    <% if user_item.notes.present? %>
+      <div class="notes-block">
+        <p class="notes-label">Notes</p>
+        <p class="notes-text"><%= user_item.notes %></p>
+      </div>
+    <% end %>
+    <% if user_item.review.present? %>
+      <div class="notes-block">
+        <p class="notes-label">Review</p>
+        <p class="notes-text"><%= user_item.review %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <div data-inline-edit-target="actions">
+    <button class="btn-outline btn-sm" data-action="click->inline-edit#edit">
+      <%= (user_item.notes.present? || user_item.review.present?) ? "Edit notes" : "+ Add notes / review" %>
+    </button>
+  </div>
+
+  <%= form_with url: update_status_path, method: :patch, local: true,
+      class: "notes-form hidden", data: { "inline-edit-target": "form" } do |f| %>
+    <%= hidden_field_tag :status, user_item.status %>
+    <div class="form-group">
+      <%= label_tag :notes, "Notes (private)" %>
+      <%= text_area_tag :notes, user_item.notes, class: "form-control", rows: 3,
+          placeholder: "Your notes while reading/watching..." %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :review, "Review" %>
+      <%= text_area_tag :review, user_item.review, class: "form-control", rows: 3,
+          placeholder: "Your review..." %>
+    </div>
+    <div class="form-actions">
+      <%= submit_tag "Save", class: "btn-primary btn-sm" %>
+      <button type="button" class="btn-outline btn-sm" data-action="click->inline-edit#cancel">Cancel</button>
+    </div>
+  <% end %>
+
+</div>
