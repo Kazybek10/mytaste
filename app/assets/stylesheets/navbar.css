@@ -22,18 +22,19 @@
 /* === LOGO === */
 .navbar-brand {
   text-decoration: none;
-  color: #ffffff;
-  font-family: serif;
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
   flex-shrink: 0;
-  transition: color 0.2s ease;
 }
 
-.navbar-brand:hover {
-  color: #aaaaaa;
+.navbar-logo {
+  height: 32px;
+  width: auto;
+  display: block;
+  filter: invert(1);
+  transition: opacity 0.2s ease;
+}
+
+.navbar-brand:hover .navbar-logo {
+  opacity: 0.7;
 }
 
 /* === GLOBAL SEARCH === */
