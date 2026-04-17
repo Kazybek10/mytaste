@@ -2,6 +2,10 @@ class BooksController < BaseController
   def index
     @books = Book.recent
     @books = @books.where("title ILIKE ?", "%#{params[:query]}%") if params[:query].present?
+    @books = @books.where("genre ILIKE ?", "%#{params[:genre]}%") if params[:genre].present?
+    @books = @books.where(publish_year: params[:year]) if params[:year].present?
+    @genres = Book.where.not(genre: [nil, ""]).distinct.pluck(:genre).sort
+    @years  = Book.where.not(publish_year: nil).distinct.pluck(:publish_year).sort.reverse
     @pagy, @books = pagy(@books)
   end
 

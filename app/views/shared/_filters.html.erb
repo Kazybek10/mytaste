@@ -1,0 +1,23 @@
+<% active = params[:genre].present? || params[:year].present? %>
+
+<%= form_with url: path, method: :get, local: true, class: "filters-form" do |f| %>
+  <div class="filters-row">
+    <% if genres.any? %>
+      <%= f.select :genre,
+          options_for_select([["All genres", ""]] + genres.map { |g| [g, g] }, params[:genre]),
+          {}, class: "form-control filter-select" %>
+    <% end %>
+
+    <% if years.any? %>
+      <%= f.select :year,
+          options_for_select([["All years", ""]] + years.map { |y| [y, y] }, params[:year]),
+          {}, class: "form-control filter-select" %>
+    <% end %>
+
+    <%= f.submit "Filter", class: "btn-outline" %>
+
+    <% if active %>
+      <%= link_to "Clear", path, class: "btn-outline" %>
+    <% end %>
+  </div>
+<% end %>
