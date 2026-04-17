@@ -2,6 +2,10 @@ class MoviesController < BaseController
   def index
     @movies = Movie.recent
     @movies = @movies.where("title ILIKE ?", "%#{params[:query]}%") if params[:query].present?
+    @movies = @movies.where("genre ILIKE ?", "%#{params[:genre]}%") if params[:genre].present?
+    @movies = @movies.where(release_year: params[:year]) if params[:year].present?
+    @genres = Movie.where.not(genre: [nil, ""]).distinct.pluck(:genre).sort
+    @years  = Movie.where.not(release_year: nil).distinct.pluck(:release_year).sort.reverse
     @pagy, @movies = pagy(@movies)
   end
 
