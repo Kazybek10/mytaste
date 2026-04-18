@@ -3,15 +3,41 @@
   margin: 0 auto;
 }
 
-.profile-header {
+.profile-hero {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  margin-bottom: 2rem;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(135deg, #1a1a1a 0%, #111 100%);
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
 }
 
-.profile-avatar-wrap {
+.profile-hero-avatar {
   flex-shrink: 0;
+}
+
+.profile-hero-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profile-stats-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.profile-stats-inline strong {
+  color: #fff;
+}
+
+.profile-stats-dot {
+  color: #444;
 }
 
 .profile-avatar-img {
@@ -215,66 +241,7 @@
   margin-left: 0.5rem;
 }
 
-.profile-totals {
-  display: flex;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-}
 
-.profile-total-card {
-  flex: 1;
-  background: #1c1c1c;
-  border: 1px solid #2a2a2a;
-  border-radius: 10px;
-  padding: 1.5rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.total-number {
-  font-size: 2.5rem;
-  color: #ffffff;
-  font-weight: 700;
-}
-
-.total-label {
-  font-size: 0.8rem;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.charts-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-.chart-card {
-  background: #1c1c1c;
-  border: 1px solid #2a2a2a;
-  border-radius: 10px;
-  padding: 1.5rem;
-}
-
-.chart-title {
-  color: #aaa;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin: 0 0 1rem 0;
-  text-align: center;
-}
-
-.chart-empty {
-  color: #444;
-  font-size: 0.85rem;
-  text-align: center;
-  margin-top: 1rem;
-}
 
 .profile-section-title {
   font-size: 1.1rem;
@@ -333,16 +300,14 @@
 .recent-status.want      { background: #2a2a2a; color: #888; }
 
 @media (max-width: 768px) {
-  .profile-totals {
-    gap: 0.75rem;
+  .profile-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
   }
 
-  .profile-total-card {
-    padding: 1rem;
-  }
-
-  .total-number {
-    font-size: 1.8rem;
+  .profile-stats-inline {
+    justify-content: center;
   }
 
   .charts-grid {

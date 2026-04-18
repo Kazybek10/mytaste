@@ -1,7 +1,7 @@
 <div class="page-wrapper profile-page">
 
-  <div class="profile-header">
-    <div class="profile-avatar-wrap">
+  <div class="profile-hero">
+    <div class="profile-hero-avatar">
       <% if current_user.avatar.attached? %>
         <img src="<%= url_for(current_user.avatar) %>" class="profile-avatar-img" />
       <% else %>
@@ -10,44 +10,19 @@
         </div>
       <% end %>
     </div>
-    <div class="profile-info">
+    <div class="profile-hero-info">
       <h1 class="profile-title"><%= current_user.display_name %></h1>
-      <p class="profile-email"><%= current_user.email %></p>
+      <div class="profile-stats-inline">
+        <span><strong><%= @stats[:movies].values.sum %></strong> Movies</span>
+        <span class="profile-stats-dot">·</span>
+        <span><strong><%= @stats[:books].values.sum %></strong> Books</span>
+        <span class="profile-stats-dot">·</span>
+        <span><strong><%= @stats[:recipes].values.sum %></strong> Recipes</span>
+      </div>
       <%= link_to "Edit profile", edit_profile_path, class: "btn-outline profile-edit-btn" %>
     </div>
   </div>
 
-  <div class="profile-totals">
-    <div class="profile-total-card">
-      <span class="total-number"><%= @stats[:movies].values.sum %></span>
-      <span class="total-label">Movies</span>
-    </div>
-    <div class="profile-total-card">
-      <span class="total-number"><%= @stats[:books].values.sum %></span>
-      <span class="total-label">Books</span>
-    </div>
-    <div class="profile-total-card">
-      <span class="total-number"><%= @stats[:recipes].values.sum %></span>
-      <span class="total-label">Recipes</span>
-    </div>
-  </div>
-
-  <div class="charts-grid"
-       data-controller="charts"
-       data-charts-stats-value="<%= @stats.to_json %>">
-    <div class="chart-card">
-      <p class="chart-title">Movies</p>
-      <canvas id="movies-chart"></canvas>
-    </div>
-    <div class="chart-card">
-      <p class="chart-title">Books</p>
-      <canvas id="books-chart"></canvas>
-    </div>
-    <div class="chart-card">
-      <p class="chart-title">Recipes</p>
-      <canvas id="recipes-chart"></canvas>
-    </div>
-  </div>
 
   <%# === WATCH LISTS === %>
   <div class="profile-section">
