@@ -47,6 +47,10 @@
             <%= button_to "Remove from list", remove_from_list_recipe_path(@recipe),
                 method: :delete, class: "btn-danger" %>
 
+            <%= render "shared/watchlist_select", user_item: @user_item,
+                watch_lists: @watch_lists,
+                update_status_path: update_status_recipe_path(@recipe) %>
+
             <%= render "shared/user_notes", user_item: @user_item,
                 update_status_path: update_status_recipe_path(@recipe) %>
           <% else %>

@@ -1,0 +1,14 @@
+<% if watch_lists.any? %>
+  <%= form_with url: update_status_path, method: :patch, local: true, class: "watchlist-select-form" do |f| %>
+    <%= hidden_field_tag :status, user_item.status %>
+    <div class="watchlist-select-row">
+      <%= select_tag :watch_list_id,
+          options_for_select(
+            [["No list", ""]] + watch_lists.map { |wl| [wl.name, wl.id] },
+            user_item.watch_list_id
+          ),
+          class: "form-control watchlist-select" %>
+      <%= submit_tag "Save", class: "btn-outline btn-sm" %>
+    </div>
+  <% end %>
+<% end %>

@@ -5,7 +5,10 @@ class BaseController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def show
-    @user_item = current_user.user_items.find_by(itemable: resource) if user_signed_in?
+    if user_signed_in?
+      @user_item   = current_user.user_items.find_by(itemable: resource)
+      @watch_lists = current_user.watch_lists
+    end
   end
 
   def new
@@ -53,8 +56,9 @@ class BaseController < ApplicationController
     user_item = current_user.user_items.find_or_initialize_by(itemable: resource)
     attrs = { status: params[:status] }
     attrs[:rating] = params[:rating] if params[:rating].present?
-    attrs[:notes]  = params[:notes]  if params.key?(:notes)
-    attrs[:review] = params[:review] if params.key?(:review)
+    attrs[:notes]         = params[:notes]         if params.key?(:notes)
+    attrs[:review]        = params[:review]        if params.key?(:review)
+    attrs[:watch_list_id] = params[:watch_list_id] if params.key?(:watch_list_id)
     user_item.update(attrs)
     redirect_to resource, status: :see_other
   end

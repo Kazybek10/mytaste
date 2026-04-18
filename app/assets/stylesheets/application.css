@@ -640,3 +640,18 @@ h1 {
 .filter-select {
   max-width: 180px;
 }
+
+/* Watchlist select */
+.watchlist-select-form {
+  margin-top: 1rem;
+}
+
+.watchlist-select-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.watchlist-select {
+  max-width: 200px;
+}
