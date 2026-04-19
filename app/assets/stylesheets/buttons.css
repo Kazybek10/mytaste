@@ -16,20 +16,55 @@
   border: 1px solid #3a3a3a;
   color: #a0a0a0;
   padding: 0.45rem 1.1rem;
-  border-radius: 6px;
+  border-radius: 8px;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
   display: inline-block;
+  cursor: pointer;
 }
 
 .back-link:hover,
 .new-item-link:hover,
 .btn-outline:hover {
-  border-color: #ffffff;
+  border-color: #888;
   color: #ffffff;
+  box-shadow: 0 0 0 1px #888;
+  transform: translateY(-1px);
+}
+
+.back-link:active,
+.new-item-link:active,
+.btn-outline:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-primary {
+  background: #ffffff;
+  color: #0f0f0f;
+  border: 1px solid #ffffff;
+  padding: 0.45rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: #e8e8e8;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .btn-danger {
@@ -37,16 +72,23 @@
   color: #e05555;
   border: 1px solid #5a2020;
   padding: 0.45rem 1.1rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
   display: inline-block;
 }
 
 .btn-danger:hover {
-  background-color: #5a2020;
+  background: #5a2020;
   color: #ff8080;
+  box-shadow: 0 4px 14px rgba(200, 50, 50, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-danger:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
