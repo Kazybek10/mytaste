@@ -1,4 +1,11 @@
 <div id="search-results">
+  <% if @movies.empty? %>
+    <div class="empty-state">
+      <span class="empty-state-icon">🎬</span>
+      <p class="empty-state-title">No movies yet</p>
+      <p class="empty-state-sub">Search above to add your first movie</p>
+    </div>
+  <% end %>
   <div class="movie-grid">
     <% @movies.each do |movie| %>
       <div class="movie-card">
