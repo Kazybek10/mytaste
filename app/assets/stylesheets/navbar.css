@@ -141,12 +141,38 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 0.25rem 0;
   transition: color 0.2s ease;
+  position: relative;
+}
+
+.navbar-item::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
 }
 
 .navbar-item:hover {
   color: #ffffff;
+}
+
+.navbar-item:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar-item.active {
+  color: #ffffff;
+}
+
+.navbar-item.active::after {
+  transform: scaleX(1);
 }
 
 @media (max-width: 768px) {
