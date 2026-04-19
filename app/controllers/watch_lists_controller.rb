@@ -1,6 +1,10 @@
 class WatchListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_watch_list, only: [:update, :destroy]
+  before_action :set_watch_list, only: [:show, :update, :destroy]
+
+  def show
+    @items = @watch_list.user_items.includes(:itemable)
+  end
 
   def create
     @watch_list = current_user.watch_lists.build(watch_list_params)

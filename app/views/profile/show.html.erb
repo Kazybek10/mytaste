@@ -64,10 +64,23 @@
               </div>
             </div>
 
-            <div class="watch-list-stats">
-              <span><%= wl.user_items.where(itemable_type: "Movie").count %> movies</span>
-              <span><%= wl.user_items.where(itemable_type: "Book").count %> books</span>
-              <span><%= wl.user_items.where(itemable_type: "Recipe").count %> recipes</span>
+            <% covers = wl.user_items.includes(:itemable).first(4).map { |ui|
+                item = ui.itemable
+                item&.try(:poster_url) || item&.try(:cover_url)
+               }.compact %>
+            <% if covers.any? %>
+              <div class="watch-list-covers">
+                <% covers.each do |cover| %>
+                  <img src="<%= cover %>" class="watch-list-cover-thumb" />
+                <% end %>
+              </div>
+            <% end %>
+
+            <div class="watch-list-footer">
+              <div class="watch-list-stats">
+                <span><%= wl.user_items.count %> items</span>
+              </div>
+              <%= link_to "View all →", watch_list_path(wl), class: "watch-list-view-link" %>
             </div>
           </div>
         <% end %>
