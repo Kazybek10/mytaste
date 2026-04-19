@@ -57,7 +57,7 @@
   color: #ffffff;
   font-size: 1.1rem;
   font-weight: 700;
-  font-family: serif;
+  font-family: 'Inter', sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -65,7 +65,7 @@
 .cta-card-desc {
   color: #888;
   font-size: 0.8rem;
-  font-family: serif;
+  font-family: 'Inter', sans-serif;
   text-align: center;
   transition: color 0.25s ease;
 }
