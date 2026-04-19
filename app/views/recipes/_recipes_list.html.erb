@@ -1,4 +1,11 @@
 <div id="search-results">
+  <% if @recipes.empty? %>
+    <div class="empty-state">
+      <span class="empty-state-icon">🍳</span>
+      <p class="empty-state-title">No recipes yet</p>
+      <p class="empty-state-sub">Search above to add your first recipe</p>
+    </div>
+  <% end %>
   <div class="recipe-grid">
     <% @recipes.each do |recipe| %>
       <div class="recipe-card">

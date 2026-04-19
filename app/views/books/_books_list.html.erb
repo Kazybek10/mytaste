@@ -1,4 +1,11 @@
 <div id="search-results">
+  <% if @books.empty? %>
+    <div class="empty-state">
+      <span class="empty-state-icon">📚</span>
+      <p class="empty-state-title">No books yet</p>
+      <p class="empty-state-sub">Search above to add your first book</p>
+    </div>
+  <% end %>
   <div class="book-grid">
     <% @books.each do |book| %>
       <div class="book-card">
