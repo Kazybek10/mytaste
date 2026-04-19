@@ -1,0 +1,30 @@
+<div class="page-wrapper">
+  <div class="top-actions">
+    <h1><%= @watch_list.name %></h1>
+    <%= link_to "← Back to profile", profile_path, class: "btn-outline" %>
+  </div>
+  <hr>
+
+  <% if @items.any? %>
+    <div class="recent-grid">
+      <% @items.each do |user_item| %>
+        <% item = user_item.itemable %>
+        <% next unless item %>
+        <% cover = item.try(:poster_url) || item.try(:cover_url) %>
+        <%= link_to polymorphic_path(item), class: "recent-card" do %>
+          <% if cover %>
+            <img src="<%= cover %>" class="recent-cover" />
+          <% elsif item.try(:cover_image)&.attached? %>
+            <%= image_tag url_for(item.cover_image), class: "recent-cover" %>
+          <% else %>
+            <div class="recent-cover-blank"></div>
+          <% end %>
+          <p class="recent-title"><%= item.title %></p>
+          <span class="recent-status <%= user_item.status %>"><%= user_item.status.capitalize %></span>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="chart-empty">This list is empty. Add items from movie, book or recipe pages.</p>
+  <% end %>
+</div>
