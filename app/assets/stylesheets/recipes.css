@@ -36,11 +36,11 @@
   flex-direction: column;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.2s ease;
+  transition: transform 0.25s ease;
 }
 
 .recipe-card-link:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 }
 
 .recipe-cover-container {
@@ -50,6 +50,11 @@
   overflow: hidden;
   background-color: #1c1c1c;
   margin-bottom: 0.65rem;
+  transition: box-shadow 0.25s ease;
+}
+
+.recipe-card-link:hover .recipe-cover-container {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
 }
 
 .recipe-cover {
@@ -57,10 +62,13 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: opacity 0.2s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-.recipe-card-link:hover .recipe-cover { opacity: 0.85; }
+.recipe-card-link:hover .recipe-cover {
+  transform: scale(1.04);
+  opacity: 0.9;
+}
 
 .recipe-cover-placeholder {
   width: 100%;
