@@ -2,7 +2,7 @@
 
 A personal catalogue for tracking movies, books, and recipes — inspired by Letterboxd.
 
-**Live:** https://mytaste.onrender.com
+**Live:** https://percata.onrender.com
 
 ---
 
@@ -11,8 +11,12 @@ A personal catalogue for tracking movies, books, and recipes — inspired by Let
 - Search movies, books and recipes via TMDB, Open Library and TheMealDB APIs
 - Add items to your personal list with status: Want / In progress / Completed
 - Rate items with a 1–5 star rating
+- Write notes and reviews for each item
+- Custom watchlists with drag & drop sorting
 - Global search across all three categories
-- User authentication (sign up / log in)
+- User authentication with avatar upload
+- Profile page with activity stats
+- Genre and year filters on index pages
 - Dark UI with blurred hero covers
 
 ## Tech Stack
@@ -21,27 +25,26 @@ A personal catalogue for tracking movies, books, and recipes — inspired by Let
 - **PostgreSQL** — database
 - **Devise** — user authentication
 - **Hotwire (Turbo + Stimulus)** — live search, interactive UI without full page reloads
-- **Chart.js** — profile statistics charts
 - **Active Storage + Cloudinary** — image uploads
 - **TMDB / Open Library / TheMealDB** — external API integrations
 - **Pagy** — pagination
-- **RSpec + FactoryBot** — 45 model and request tests
+- **RSpec + FactoryBot** — 88 model and request tests
 - **Deployed on Render**
 
 ## Tests
 
 ```bash
 bundle exec rspec
-# 45 examples, 0 failures
+# 88 examples, 0 failures
 ```
 
-Covers model validations and request specs for all three resources.
+Covers model validations, associations and request specs for all resources.
 
 ## Getting Started
 
 ```bash
-git clone https://github.com/Kazybek10/mytaste.git
-cd mytaste
+git clone https://github.com/Kazybek10/percata.git
+cd percata
 bundle install
 cp .env.example .env  # add your TMDB_TOKEN
 rails db:create db:migrate
