@@ -1,4 +1,4 @@
-# MyTaste
+# Percata
 
 A personal catalogue for tracking movies, books, and recipes — inspired by Letterboxd.
 
@@ -11,7 +11,6 @@ A personal catalogue for tracking movies, books, and recipes — inspired by Let
 - Search movies, books and recipes via TMDB, Open Library and TheMealDB APIs
 - Add items to your personal list with status: Want / In progress / Completed
 - Rate items with a 1–5 star rating
-- Profile page with Chart.js statistics
 - Global search across all three categories
 - User authentication (sign up / log in)
 - Dark UI with blurred hero covers
