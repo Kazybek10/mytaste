@@ -2,7 +2,7 @@
 
 A personal catalogue for tracking movies, books, and recipes — inspired by Letterboxd.
 
-**Live:** https://percata.onrender.com
+**Live:** https://mytaste.onrender.com
 
 ---
 
@@ -35,7 +35,6 @@ A personal catalogue for tracking movies, books, and recipes — inspired by Let
 
 ```bash
 bundle exec rspec
-# 88 examples, 0 failures
 ```
 
 Covers model validations, associations and request specs for all resources.
@@ -46,7 +45,7 @@ Covers model validations, associations and request specs for all resources.
 git clone https://github.com/Kazybek10/percata.git
 cd percata
 bundle install
-cp .env.example .env  # add your TMDB_TOKEN
+cp .env.example .env 
 rails db:create db:migrate
 rails server
 ```
