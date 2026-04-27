@@ -7,6 +7,7 @@ class MoviesController < BaseController
     @genres = Movie.where.not(genre: [nil, ""]).distinct.pluck(:genre).sort
     @years  = Movie.where.not(release_year: nil).distinct.pluck(:release_year).sort.reverse
     @pagy, @movies = pagy(@movies)
+    render json: @movies
   end
 
   def api_search
