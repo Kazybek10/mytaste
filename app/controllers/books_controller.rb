@@ -7,6 +7,10 @@ class BooksController < BaseController
     @genres = Book.where.not(genre: [nil, ""]).distinct.pluck(:genre).sort
     @years  = Book.where.not(publish_year: nil).distinct.pluck(:publish_year).sort.reverse
     @pagy, @books = pagy(@books)
+     respond_to do |format|
+     format.html
+     format.json { render json: @books }
+   end
   end
 
   def api_search
