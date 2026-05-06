@@ -3,6 +3,10 @@ class RecipesController < BaseController
     @recipes = Recipe.recent
     @recipes = @recipes.where("title ILIKE ?", "%#{params[:query]}%") if params[:query].present?
     @pagy, @recipes = pagy(@recipes)
+     respond_to do |format|
+     format.html
+     format.json { render json: @recipes }
+    end
   end
 
   def api_search
