@@ -9,6 +9,11 @@ class BaseController < ApplicationController
       @user_item   = current_user.user_items.find_by(itemable: resource)
       @watch_lists = current_user.watch_lists
     end
+
+    respond_to do |format|
+    format.html
+    format.json { render json: resource }
+    end
   end
 
   def new
