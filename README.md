@@ -9,15 +9,17 @@ A personal catalogue for tracking movies, books, and recipes — inspired by Let
 ## Features
 
 - Search movies, books and recipes via TMDB, Open Library and TheMealDB APIs
-- Add items to your personal list with status: Want / In progress / Completed
+- Import items from external APIs with one click
+- Add items to your personal list with status: Want / Watching / Completed
 - Rate items with a 1–5 star rating
 - Write notes and reviews for each item
-- Custom watchlists with drag & drop sorting
+- Custom watchlists with drag & drop sorting (max 10 per user)
 - Global search across all three categories
+- Genre and year filters on index pages
 - User authentication with avatar upload
 - Profile page with activity stats
-- Genre and year filters on index pages
 - Dark UI with blurred hero covers
+- REST API with CORS support for external frontend
 
 ## Tech Stack
 
@@ -25,7 +27,10 @@ A personal catalogue for tracking movies, books, and recipes — inspired by Let
 - **PostgreSQL** — database
 - **Devise** — user authentication
 - **Hotwire (Turbo + Stimulus)** — live search, interactive UI without full page reloads
+- **React** — star rating component
+- **SortableJS** — drag & drop watchlist sorting
 - **Active Storage + Cloudinary** — image uploads
+- **rack-cors** — CORS configuration for API access
 - **TMDB / Open Library / TheMealDB** — external API integrations
 - **Pagy** — pagination
 - **RSpec + FactoryBot** — 88 model and request tests
