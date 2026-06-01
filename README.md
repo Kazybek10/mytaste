@@ -34,7 +34,7 @@ A personal catalogue for tracking movies, books, and recipes — inspired by Let
 - **TMDB / Open Library / TheMealDB** — external API integrations
 - **Pagy** — pagination
 - **RSpec + FactoryBot** — 88 model and request tests
-- **Deployed on Render**
+- **Deployed on Render** with UptimeRobot monitoring to prevent cold starts
 
 ## Tests
 
